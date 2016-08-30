@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @EntityListeners(AuditingEntityListener.class)
 public class ChargeStandard extends AbstractAuditingEntity<Integer> {
 
-    @Column(name = "cabinet_id", nullable = false)
+    @Column(name = "cabinet_id", nullable = true)
     private Integer cabinetId;
 
     @Column(name = "box_size_id", nullable = false)

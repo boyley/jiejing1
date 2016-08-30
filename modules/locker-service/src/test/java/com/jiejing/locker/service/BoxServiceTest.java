@@ -1,12 +1,11 @@
 package com.jiejing.locker.service;
 
-import com.jiejing.locker.domains.Box;
-import com.jiejing.locker.domains.Cabinet;
+import com.jiejing.locker.domains.QBox;
 import com.jiejing.locker.repository.BoxRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.ZonedDateTime;
+import org.springframework.test.annotation.SystemProfileValueSource;
 
 /**
  * Created by Bogle on 2016/8/30.
@@ -17,21 +16,7 @@ public class BoxServiceTest extends AbsServiceTest {
     private BoxRepository boxRepository;
 
     @Test
-    public void saveTest() {
-        Box box = new Box();
-        box.setCreatedBy(1);
-        box.setCreatedDate(ZonedDateTime.now());
-        box.setLastModifiedBy(1);
-        box.setLastModifiedDate(ZonedDateTime.now());
+    public void findOneTest() {
 
-        box.setCode("code");
-        box.setDescription("description");
-        box.setCabinetId(3);
-        box.setBoxSizeId(1);
-
-        box.setGateLockState(Box.GateLockState.CLOSE);
-        box.setDepositState(Box.DepositState.Y);
-        box.setStatus(Cabinet.Status.ENABLE);
-        this.boxRepository.save(box);
     }
 }

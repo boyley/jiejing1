@@ -1,6 +1,5 @@
 package com.jiejing.locker.domains;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -15,14 +14,12 @@ import javax.persistence.EntityListeners;
 @EntityListeners(AuditingEntityListener.class)
 public class Region extends AbstractAuditingEntity<Integer> {
 
-    @NotNull
     @Column(name = "code", nullable = false)
     private String code;
 
     @Column(name = "name", nullable = true)
     private String name;
 
-    @NotNull
     @Column(name = "parent_id", nullable = false)
     private Integer parentId;//所属父节点id
 
