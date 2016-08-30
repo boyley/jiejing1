@@ -10,36 +10,22 @@ import java.time.ZonedDateTime;
 /**
  * Created by Bogle on 2016/8/29.
  */
-@Entity(name = "sys_user")
-public class User implements Persistable<Integer> {
-
-    public enum Sex {
-        F("女"), M("男"), N("未知");
-        private String value;
-
-        Sex(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
+@Entity(name = "sys_user_extra")
+public class UserExtra implements Persistable<Integer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
 
-    @OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
-    private Account account;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
-    @Column(name = "name", nullable = true)
-    private String name;
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "dictionary_id", referencedColumnName = "id", nullable = false)
+    private Dictionary dictionary;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sex", nullable = true)
-    private Sex sex;
+    @Column(name = "no", nullable = false)
+    private String no;
 
     @CreatedDate
     @Column(name = "created_date", nullable = false)
@@ -49,38 +35,37 @@ public class User implements Persistable<Integer> {
     @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
 
-
     @Override
     public Integer getId() {
-        return id;
+        return null;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public Dictionary getDictionary() {
+        return dictionary;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
     }
 
-    public Sex getSex() {
-        return sex;
+    public String getNo() {
+        return no;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setNo(String no) {
+        this.no = no;
     }
 
     public ZonedDateTime getCreatedDate() {

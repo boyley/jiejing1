@@ -33,9 +33,9 @@ public class Box extends AbstractAuditingEntity<Integer> {
     @Column(name = "code", nullable = false)
     private String code;
     @Column(name = "cabinet_id", nullable = false)
-    private Integer cabinet_id;
-    @Column(name = "box_id", nullable = false)
-    private Integer boxId;
+    private Integer cabinetId;
+    @Column(name = "box_size_id", nullable = false)
+    private Integer boxSizeId;
     @Enumerated(EnumType.STRING)
     @Column(name = "gate_lock_state", nullable = true)
     private GateLockState gateLockState;
@@ -45,7 +45,6 @@ public class Box extends AbstractAuditingEntity<Integer> {
     @Column(name = "description", nullable = true)
     private String description;
 
-
     public String getCode() {
         return code;
     }
@@ -54,20 +53,20 @@ public class Box extends AbstractAuditingEntity<Integer> {
         this.code = code;
     }
 
-    public Integer getCabinet_id() {
-        return cabinet_id;
+    public Integer getCabinetId() {
+        return cabinetId;
     }
 
-    public void setCabinet_id(Integer cabinet_id) {
-        this.cabinet_id = cabinet_id;
+    public void setCabinetId(Integer cabinetId) {
+        this.cabinetId = cabinetId;
     }
 
-    public Integer getBoxId() {
-        return boxId;
+    public Integer getBoxSizeId() {
+        return boxSizeId;
     }
 
-    public void setBoxId(Integer boxId) {
-        this.boxId = boxId;
+    public void setBoxSizeId(Integer boxSizeId) {
+        this.boxSizeId = boxSizeId;
     }
 
     public GateLockState getGateLockState() {

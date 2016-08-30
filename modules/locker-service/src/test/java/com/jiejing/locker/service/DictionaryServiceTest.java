@@ -1,22 +1,16 @@
 package com.jiejing.locker.service;
 
-import com.jiejing.locker.SampleApplicationTest;
 import com.jiejing.locker.domains.Dictionary;
 import com.jiejing.locker.repository.DictionaryRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.ZonedDateTime;
 
 /**
  * Created by Bogle on 2016/8/29.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(SampleApplicationTest.class)
-public class DictionaryServiceTest {
+public class DictionaryServiceTest extends AbsServiceTest {
 
     @Autowired
     private DictionaryRepository dictionaryRepository;
@@ -40,6 +34,7 @@ public class DictionaryServiceTest {
 
     @Test
     public void findOneTest() {
-        System.out.println(dictionaryRepository.findOne(3).getCode());;
+        System.out.println(dictionaryRepository.findOne(3).getCode());
+        ;
     }
 }

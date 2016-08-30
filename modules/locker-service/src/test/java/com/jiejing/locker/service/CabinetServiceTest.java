@@ -1,13 +1,9 @@
 package com.jiejing.locker.service;
 
-import com.jiejing.locker.SampleApplicationTest;
 import com.jiejing.locker.domains.Cabinet;
 import com.jiejing.locker.repository.CabinetRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -15,9 +11,7 @@ import java.time.ZonedDateTime;
 /**
  * Created by Bogle on 2016/8/29.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(SampleApplicationTest.class)
-public class CabinetServiceTest {
+public class CabinetServiceTest extends AbsServiceTest {
 
     @Autowired
     private CabinetRepository cabinetRepository;
