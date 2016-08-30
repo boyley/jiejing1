@@ -7,5 +7,5 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 /**
  * Created by Bogle on 2016/8/30.
  */
-public interface BoxRepository extends JpaRepository<Box, Integer> ,QueryDslPredicateExecutor {
+public interface BoxRepository extends JpaRepository<Box, Integer> ,QueryDslPredicateExecutor<Box> {
 }
