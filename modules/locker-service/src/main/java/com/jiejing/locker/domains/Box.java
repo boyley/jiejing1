@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
+ * 箱子信息
  * Created by Bogle on 2016/8/29.
  */
 @Entity(name = "locker_box")
@@ -41,9 +42,12 @@ public class Box extends AbstractAuditingEntity<Integer> {
     private GateLockState gateLockState;
     @Enumerated(EnumType.STRING)
     @Column(name = "deposit_state", nullable = true)
-    private DepositState depositState;
+    private DepositState depositState;//存物状态Y:有存物，N：无存物，ERROR：异常
     @Column(name = "description", nullable = true)
     private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
 
     public String getCode() {
         return code;
@@ -91,5 +95,13 @@ public class Box extends AbstractAuditingEntity<Integer> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

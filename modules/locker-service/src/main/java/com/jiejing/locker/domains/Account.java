@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
+ * 账号信息
  * Created by Bogle on 2016/8/29.
  */
-@Entity(name = "sys_account")
+@Entity(name = "locker_account")
 public class Account implements Persistable<Integer> {
 
     @Id

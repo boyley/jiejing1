@@ -8,9 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 
 /**
+ * 区域信息
  * Created by Bogle on 2016/8/29.
  */
-@Entity(name = "locker_region")
+@Entity(name = "sys_region")
 @EntityListeners(AuditingEntityListener.class)
 public class Region extends AbstractAuditingEntity<Integer> {
 
@@ -23,7 +24,7 @@ public class Region extends AbstractAuditingEntity<Integer> {
 
     @NotNull
     @Column(name = "parent_id", nullable = false)
-    private Integer parentId;
+    private Integer parentId;//所属父节点id
 
     @Column(name = "url", nullable = true)
     private String url;

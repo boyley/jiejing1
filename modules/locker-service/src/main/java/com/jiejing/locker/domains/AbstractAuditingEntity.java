@@ -21,6 +21,24 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
 
     private static final long serialVersionUID = 1L;
 
+    public enum Status {
+        ENABLE("启用"), DISENABLE("禁用"), ERROR("异常");
+        private String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+    }
+
+    public enum ChargeType {
+        TIME_HOUR("时间节点"), TIME_CYCLE("时间段收费");
+        private String value;
+
+        ChargeType(String value) {
+            this.value = value;
+        }
+    }
+
     @Id
     @GeneratedValue
     private ID id;

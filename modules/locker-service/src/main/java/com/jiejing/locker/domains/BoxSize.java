@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 
 /**
+ * 箱子规格
  * Created by Bogle on 2016/8/29.
  */
 @Entity(name = "locker_box_size")

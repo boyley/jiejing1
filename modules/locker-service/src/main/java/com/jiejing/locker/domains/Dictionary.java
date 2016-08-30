@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 /**
+ * 字典
  * Created by Bogle on 2016/8/29.
  */
 @Entity(name = "sys_dictionary")
@@ -19,11 +20,14 @@ public class Dictionary extends AbstractAuditingEntity<Integer> {
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "value_type", nullable = false)
-    private String valueType;
+    private String valueType;//字典值类型
     @Column(name = "value", nullable = false)
-    private String value;
+    private String value;//字典值
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "parent_id", nullable = true)
+    private Integer parentId;//父节点id
 
 
     public String getCode() {
@@ -64,5 +68,13 @@ public class Dictionary extends AbstractAuditingEntity<Integer> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 }

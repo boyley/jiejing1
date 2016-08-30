@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 /**
+ * 用户其他信息
  * Created by Bogle on 2016/8/29.
  */
 @Entity(name = "sys_user_extra")
@@ -21,11 +22,11 @@ public class UserExtra implements Persistable<Integer> {
     private Integer userId;
 
     @OneToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "dictionary_id", referencedColumnName = "id", nullable = false)
-    private Dictionary dictionary;
+    @JoinColumn(name = "cert_type", referencedColumnName = "id", nullable = false)
+    private Dictionary certType;//证件类型（引用sys_dictionary）
 
-    @Column(name = "no", nullable = false)
-    private String no;
+    @Column(name = "num", nullable = false)
+    private String num;//证件号
 
     @CreatedDate
     @Column(name = "created_date", nullable = false)
@@ -52,20 +53,20 @@ public class UserExtra implements Persistable<Integer> {
         this.userId = userId;
     }
 
-    public Dictionary getDictionary() {
-        return dictionary;
+    public Dictionary getCertType() {
+        return certType;
     }
 
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    public void setCertType(Dictionary certType) {
+        this.certType = certType;
     }
 
-    public String getNo() {
-        return no;
+    public String getNum() {
+        return num;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public ZonedDateTime getCreatedDate() {

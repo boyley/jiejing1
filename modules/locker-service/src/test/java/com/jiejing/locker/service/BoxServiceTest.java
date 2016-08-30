@@ -1,6 +1,7 @@
 package com.jiejing.locker.service;
 
 import com.jiejing.locker.domains.Box;
+import com.jiejing.locker.domains.Cabinet;
 import com.jiejing.locker.repository.BoxRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class BoxServiceTest extends AbsServiceTest {
 
         box.setGateLockState(Box.GateLockState.CLOSE);
         box.setDepositState(Box.DepositState.Y);
-
+        box.setStatus(Cabinet.Status.ENABLE);
         this.boxRepository.save(box);
     }
 }

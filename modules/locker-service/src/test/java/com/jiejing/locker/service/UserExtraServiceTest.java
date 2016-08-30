@@ -22,10 +22,10 @@ public class UserExtraServiceTest extends AbsServiceTest {
         userExtra.setCreatedDate(ZonedDateTime.now());
         userExtra.setLastModifiedDate(ZonedDateTime.now());
         userExtra.setUserId(1);
-        userExtra.setNo("number");
+        userExtra.setNum("number");
         Dictionary dictionary = new Dictionary();
         dictionary.setId(3);
-        userExtra.setDictionary(dictionary);
+        userExtra.setCertType(dictionary);
 
         this.userExtraRepository.save(userExtra);
     }
