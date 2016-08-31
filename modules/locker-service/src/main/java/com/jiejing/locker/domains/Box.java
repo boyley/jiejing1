@@ -1,10 +1,7 @@
 package com.jiejing.locker.domains;
 
 import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -13,7 +10,8 @@ import javax.persistence.*;
  * 箱子信息
  * Created by Bogle on 2016/8/29.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)

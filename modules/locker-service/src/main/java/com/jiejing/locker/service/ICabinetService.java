@@ -1,6 +1,6 @@
 package com.jiejing.locker.service;
 
-import com.jiejing.locker.service.dto.CabinetDto;
+import com.jiejing.locker.domains.Cabinet;
 
 /**
  * Created by Bogle on 2016/8/30.
@@ -10,9 +10,9 @@ public interface ICabinetService {
     /**
      * 保存柜子信息
      *
-     * @param cabinetDto
+     * @param cabinet
      */
-    CabinetDto save(CabinetDto cabinetDto);
+    Cabinet save(Cabinet cabinet);
 
-    CabinetDto findOne(Integer id);
+    Cabinet findOne(Integer id);
 }

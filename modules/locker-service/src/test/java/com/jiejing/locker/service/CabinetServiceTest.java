@@ -2,6 +2,7 @@ package com.jiejing.locker.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jiejing.locker.defines.Const;
+import com.jiejing.locker.mapper.CabinetMapper;
 import com.jiejing.locker.service.dto.BoxDto;
 import com.jiejing.locker.service.dto.CabinetDto;
 import org.junit.Test;
@@ -18,6 +19,9 @@ import java.util.Set;
 public class CabinetServiceTest extends AbsServiceTest {
 
     ObjectMapper mapper = new ObjectMapper();
+
+    @Autowired
+    private CabinetMapper cabinetMapper;
 
     @Autowired
     public ICabinetService cabinetService;
@@ -46,12 +50,12 @@ public class CabinetServiceTest extends AbsServiceTest {
         boxDtos.add(box);
         cabinet.setBoxs(boxDtos);
 
-        mapper.writeValue(System.out, this.cabinetService.save(cabinet));
+        mapper.writeValue(System.out, this.cabinetService.save(this.cabinetMapper.cabinetDtoToCabinet(cabinet)));
     }
 
     @Test
     public void findOne() throws IOException {
-        CabinetDto cabinetDto = this.cabinetService.findOne(3);
+        CabinetDto cabinetDto = this.cabinetMapper.cabinetToCabinetDto(this.cabinetService.findOne(3));
         mapper.writeValue(System.out, cabinetDto);
     }
 }

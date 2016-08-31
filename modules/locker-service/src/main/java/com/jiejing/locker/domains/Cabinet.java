@@ -42,7 +42,8 @@ public class Cabinet extends AbstractAuditingEntity<Integer> {
     private Boolean voucherVerify = false;//是否证件验证
     @Column(name = "description", nullable = true)
     private String description;
-    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
+    //    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
+    @Transient
     private Set<Box> boxs;
 }
