@@ -12,7 +12,7 @@ import javax.inject.Inject;
 /**
  * Created by Bogle on 2016/8/31.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(uses = CabinetMapperUtil.class, componentModel = "spring")
 public abstract class CabinetMapper {
 
     @Inject
@@ -28,7 +28,8 @@ public abstract class CabinetMapper {
             @Mapping(source = "status", target = "status"),
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
-            @Mapping(source = "description", target = "description")
+            @Mapping(source = "description", target = "description"),
+            @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction2.class)
     })
     public abstract CabinetDto cabinetToCabinetDto(Cabinet cabinet);
 
@@ -42,7 +43,8 @@ public abstract class CabinetMapper {
             @Mapping(source = "status", target = "status"),
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
-            @Mapping(source = "description", target = "description")
+            @Mapping(source = "description", target = "description"),
+            @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction3.class)
     })
     public abstract Cabinet cabinetDtoToCabinet(CabinetDto cabinetDto);
 

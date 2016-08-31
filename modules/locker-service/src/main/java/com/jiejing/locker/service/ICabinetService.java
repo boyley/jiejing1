@@ -13,4 +13,6 @@ public interface ICabinetService {
      * @param cabinetDto
      */
     CabinetDto save(CabinetDto cabinetDto);
+
+    CabinetDto findOne(Integer id);
 }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * 柜子信息表
@@ -41,5 +42,7 @@ public class Cabinet extends AbstractAuditingEntity<Integer> {
     private Boolean voucherVerify = false;//是否证件验证
     @Column(name = "description", nullable = true)
     private String description;
-
+    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
+    private Set<Box> boxs;
 }

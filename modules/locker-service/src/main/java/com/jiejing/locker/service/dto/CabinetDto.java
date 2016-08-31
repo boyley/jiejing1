@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -29,6 +30,6 @@ public class CabinetDto implements Serializable {
     private Boolean multiple = false;//可多次使用
     private Boolean voucherVerify = false;//是否证件验证
     private String description;
-
+    private Set<BoxDto> boxs;
 
 }

@@ -19,4 +19,9 @@ public class CabinetServiceImpl implements ICabinetService {
     public CabinetDto save(CabinetDto cabinetDto) {
         return this.cabinetMapper.save(cabinetDto);
     }
+
+    @Override
+    public CabinetDto findOne(Integer id) {
+        return this.cabinetMapper.findOne(id);
+    }
 }
