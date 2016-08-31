@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -11,6 +13,8 @@ import javax.persistence.Table;
  * 字典
  * Created by Bogle on 2016/8/29.
  */
+@Getter
+@Setter
 @Entity(name = "sys_dictionary")
 @EntityListeners(AuditingEntityListener.class)
 public class Dictionary extends AbstractAuditingEntity<Integer> {
@@ -28,53 +32,4 @@ public class Dictionary extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "parent_id", nullable = true)
     private Integer parentId;//父节点id
-
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValueType() {
-        return valueType;
-    }
-
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
 }

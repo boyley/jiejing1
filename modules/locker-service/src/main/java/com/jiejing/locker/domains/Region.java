@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.EntityListeners;
  * 区域信息
  * Created by Bogle on 2016/8/29.
  */
+@Getter
+@Setter
 @Entity(name = "sys_region")
 @EntityListeners(AuditingEntityListener.class)
 public class Region extends AbstractAuditingEntity<Integer> {
@@ -28,44 +32,4 @@ public class Region extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "description", nullable = true)
     private String description;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

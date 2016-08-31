@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
  * 订单
  * Created by Bogle on 2016/8/30.
  */
+@Getter
+@Setter
 @Entity(name = "sys_order")
 @EntityListeners(AuditingEntityListener.class)
 public class Order extends AbstractAuditingEntity<Integer> {
@@ -40,44 +44,4 @@ public class Order extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "pay_type", nullable = true)
     private Integer payType;//支付方式,关联sys_dictionary表
-
-    public String getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public OrderState getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(OrderState orderState) {
-        this.orderState = orderState;
-    }
-
-    public Integer getOrderSource() {
-        return orderSource;
-    }
-
-    public void setOrderSource(Integer orderSource) {
-        this.orderSource = orderSource;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getPayType() {
-        return payType;
-    }
-
-    public void setPayType(Integer payType) {
-        this.payType = payType;
-    }
 }

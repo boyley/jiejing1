@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
  * 箱子信息
  * Created by Bogle on 2016/8/29.
  */
+@Getter
+@Setter
 @Entity(name = "locker_box")
 @EntityListeners(AuditingEntityListener.class)
 public class Box extends AbstractAuditingEntity<Integer> {
@@ -48,60 +52,4 @@ public class Box extends AbstractAuditingEntity<Integer> {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Integer getCabinetId() {
-        return cabinetId;
-    }
-
-    public void setCabinetId(Integer cabinetId) {
-        this.cabinetId = cabinetId;
-    }
-
-    public Integer getBoxSizeId() {
-        return boxSizeId;
-    }
-
-    public void setBoxSizeId(Integer boxSizeId) {
-        this.boxSizeId = boxSizeId;
-    }
-
-    public GateLockState getGateLockState() {
-        return gateLockState;
-    }
-
-    public void setGateLockState(GateLockState gateLockState) {
-        this.gateLockState = gateLockState;
-    }
-
-    public DepositState getDepositState() {
-        return depositState;
-    }
-
-    public void setDepositState(DepositState depositState) {
-        this.depositState = depositState;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }

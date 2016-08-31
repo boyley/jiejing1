@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import java.io.Serializable;
  * 账号信息
  * Created by Bogle on 2016/8/29.
  */
+@Getter
+@Setter
 @Entity(name = "locker_account")
 public class Account implements Persistable<Integer> {
 
@@ -21,23 +25,6 @@ public class Account implements Persistable<Integer> {
 
     @Column(name = "phone_no", nullable = false)
     private String phoneNo;
-
-    @Override
-    public Integer getId() {
-        return null;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
 
     @Override
     public boolean isNew() {

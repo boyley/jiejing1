@@ -1,5 +1,9 @@
 package com.jiejing.locker.domains;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -9,6 +13,10 @@ import java.math.BigDecimal;
  * 柜子信息表
  * Created by Bogle on 2016/8/29.
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Entity(name = "locker_cabinet")
 @EntityListeners(AuditingEntityListener.class)
 public class Cabinet extends AbstractAuditingEntity<Integer> {
@@ -33,75 +41,4 @@ public class Cabinet extends AbstractAuditingEntity<Integer> {
     @Column(name = "description", nullable = true)
     private String description;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Integer regionId) {
-        this.regionId = regionId;
-    }
-
-    public BigDecimal getLon() {
-        return lon;
-    }
-
-    public void setLon(BigDecimal lon) {
-        this.lon = lon;
-    }
-
-    public BigDecimal getLat() {
-        return lat;
-    }
-
-    public void setLat(BigDecimal lat) {
-        this.lat = lat;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Boolean getMultiple() {
-        return multiple;
-    }
-
-    public void setMultiple(Boolean multiple) {
-        this.multiple = multiple;
-    }
-
-    public Boolean getVoucherVerify() {
-        return voucherVerify;
-    }
-
-    public void setVoucherVerify(Boolean voucherVerify) {
-        this.voucherVerify = voucherVerify;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

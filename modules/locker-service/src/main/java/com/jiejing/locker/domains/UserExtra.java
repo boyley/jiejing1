@@ -1,5 +1,7 @@
 package com.jiejing.locker.domains;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
@@ -11,6 +13,8 @@ import java.time.ZonedDateTime;
  * 用户其他信息
  * Created by Bogle on 2016/8/29.
  */
+@Getter
+@Setter
 @Entity(name = "sys_user_extra")
 public class UserExtra implements Persistable<Integer> {
 
@@ -35,55 +39,6 @@ public class UserExtra implements Persistable<Integer> {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
-
-    @Override
-    public Integer getId() {
-        return null;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Dictionary getCertType() {
-        return certType;
-    }
-
-    public void setCertType(Dictionary certType) {
-        this.certType = certType;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
-    public ZonedDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(ZonedDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public ZonedDateTime getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 
     @Override
     public boolean isNew() {
