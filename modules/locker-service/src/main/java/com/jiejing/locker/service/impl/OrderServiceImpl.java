@@ -43,7 +43,7 @@ public class OrderServiceImpl implements IOrderService {
         order.setOrderNum(orderNum());
         order = this.orderRepository.save(order);
         leaseBox.setOrderId(order.getId());
-
+        this.leaseBoxService.save
         return null;
     }
 
