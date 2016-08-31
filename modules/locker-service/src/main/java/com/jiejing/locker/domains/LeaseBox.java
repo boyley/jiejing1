@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.jiejing.locker.defines.Const;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,19 +21,6 @@ import java.math.BigDecimal;
 @Entity(name = "locker_lease_box")
 @EntityListeners(AuditingEntityListener.class)
 public class LeaseBox extends AbstractAuditingEntity<Integer> {
-
-    public enum BoxState {
-        DQ("待取"), YQ("已取");
-        private String value;
-
-        BoxState(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
 
     @Column(name = "cabinet_id", nullable = false)
     private Integer cabinetId;
@@ -63,7 +51,7 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "charge_type", nullable = false)
-    private ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+    private Const.ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
 
     @Column(name = "cycle_time", nullable = false)
     private Integer cycleTime;//收费周期（小时）
@@ -76,7 +64,7 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "box_state", nullable = false)
-    private ChargeType boxState;//箱状态DQ:待取，YQ：已取
+    private Const.BoxState boxState;//箱状态DQ:待取，YQ：已取
 
     @Column(name = "cert_type", nullable = false)
     private Integer certType;//证件类型（引用sys_dictionary）

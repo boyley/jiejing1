@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.jiejing.locker.defines.Const;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,7 +33,7 @@ public class ChargeStandard extends AbstractAuditingEntity<Integer> {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "charge_type", nullable = false)
-    private ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+    private Const.ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
 
     @Column(name = "cycle_time", nullable = false)
     private Integer cycleTime;//收费周期（小时）

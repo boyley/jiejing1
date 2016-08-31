@@ -1,5 +1,6 @@
 package com.jiejing.locker.service.dto;
 
+import com.jiejing.locker.defines.Const;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,8 +15,9 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class CabinetDto implements Serializable {
+
 
     private String id;
     private String code;
@@ -23,7 +25,7 @@ public class CabinetDto implements Serializable {
     private Integer regionId;//地址：道路/小区 编码
     private BigDecimal lon;//地理经度
     private BigDecimal lat;//地理纬度
-    private String status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
+    private Const.Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
     private Boolean multiple = false;//可多次使用
     private Boolean voucherVerify = false;//是否证件验证
     private String description;

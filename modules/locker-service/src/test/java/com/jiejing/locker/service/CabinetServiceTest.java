@@ -27,7 +27,7 @@ public class CabinetServiceTest extends AbsServiceTest {
         cabinet.setLat(new BigDecimal(3L));
         cabinet.setLon(new BigDecimal(3L));
         cabinet.setRegionId(1);
-        cabinet.setStatus("ENABLE");
+        cabinet.setStatus(CabinetDto.Status.ENABLE);
         mapper.writeValue(System.out,this.cabinetService.save(cabinet));
     }
 }

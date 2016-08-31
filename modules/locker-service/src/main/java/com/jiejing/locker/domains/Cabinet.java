@@ -1,12 +1,15 @@
 package com.jiejing.locker.domains;
 
+import com.jiejing.locker.defines.Const;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import java.math.BigDecimal;
 
 /**
@@ -16,7 +19,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "locker_cabinet")
 @EntityListeners(AuditingEntityListener.class)
 public class Cabinet extends AbstractAuditingEntity<Integer> {
@@ -31,9 +34,8 @@ public class Cabinet extends AbstractAuditingEntity<Integer> {
     private BigDecimal lon;//地理经度
     @Column(name = "lat", nullable = true)
     private BigDecimal lat;//地理纬度
-    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
+    private Const.Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
     @Column(name = "multiple", nullable = false)
     private Boolean multiple = false;//可多次使用
     @Column(name = "voucher_verify", nullable = false)
