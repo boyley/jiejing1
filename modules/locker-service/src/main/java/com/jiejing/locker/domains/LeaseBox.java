@@ -1,10 +1,7 @@
 package com.jiejing.locker.domains;
 
 import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -14,7 +11,8 @@ import java.math.BigDecimal;
  * 租箱记录
  * Created by Bogle on 2016/8/30.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)

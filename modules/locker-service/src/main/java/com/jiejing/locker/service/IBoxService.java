@@ -7,5 +7,7 @@ import com.jiejing.locker.domains.Box;
  */
 public interface IBoxService {
 
+    Box findOne(Integer id);
+
     Iterable<Box> save(Iterable<Box> entities);
 }

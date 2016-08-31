@@ -1,10 +1,7 @@
 package com.jiejing.locker.domains;
 
 import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -14,14 +11,14 @@ import java.math.BigDecimal;
  * 订单
  * Created by Bogle on 2016/8/30.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "sys_order")
 @EntityListeners(AuditingEntityListener.class)
 public class Order extends AbstractAuditingEntity<Integer> {
-
 
 
     @Column(name = "order_num", nullable = false)
@@ -39,4 +36,7 @@ public class Order extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "pay_type", nullable = true)
     private Integer payType;//支付方式,关联sys_dictionary表
+
+    @Transient
+    private LeaseBox leaseBox;
 }

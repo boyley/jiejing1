@@ -22,6 +22,11 @@ public class BoxServiceImpl implements IBoxService {
     private BoxRepository boxRepository;
 
     @Override
+    public Box findOne(Integer id) {
+        return boxRepository.findOne(id);
+    }
+
+    @Override
     public Iterable<Box> save(Iterable<Box> entities) {
         Iterator<Box> iter = entities.iterator();
         while (iter.hasNext()) {
