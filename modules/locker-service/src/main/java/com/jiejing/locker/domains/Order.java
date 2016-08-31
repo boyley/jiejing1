@@ -1,7 +1,9 @@
 package com.jiejing.locker.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,15 +13,18 @@ import java.math.BigDecimal;
  * 订单
  * Created by Bogle on 2016/8/30.
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "sys_order")
 @EntityListeners(AuditingEntityListener.class)
 public class Order extends AbstractAuditingEntity<Integer> {
 
     public enum OrderState {
-        DZF("待支付"),YZF("已支付"),YQX("已取消"),YWC("已完成"),YGB("已关闭");
+        DZF("待支付"), YZF("已支付"), YQX("已取消"), YWC("已完成"), YGB("已关闭");
         private String value;
+
         OrderState(String value) {
             this.value = value;
         }

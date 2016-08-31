@@ -1,20 +1,23 @@
 package com.jiejing.locker.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.Table;
 
 /**
  * 字典
  * Created by Bogle on 2016/8/29.
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "sys_dictionary")
 @EntityListeners(AuditingEntityListener.class)
 public class Dictionary extends AbstractAuditingEntity<Integer> {

@@ -1,7 +1,9 @@
 package com.jiejing.locker.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
@@ -13,8 +15,10 @@ import java.time.ZonedDateTime;
  * 用户其他信息
  * Created by Bogle on 2016/8/29.
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "sys_user_extra")
 public class UserExtra implements Persistable<Integer> {
 

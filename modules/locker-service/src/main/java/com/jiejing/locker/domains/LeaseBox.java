@@ -1,7 +1,9 @@
 package com.jiejing.locker.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,15 +13,18 @@ import java.math.BigDecimal;
  * 租箱记录
  * Created by Bogle on 2016/8/30.
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "locker_lease_box")
 @EntityListeners(AuditingEntityListener.class)
 public class LeaseBox extends AbstractAuditingEntity<Integer> {
 
     public enum BoxState {
-        DQ("待取"),YQ("已取");
+        DQ("待取"), YQ("已取");
         private String value;
+
         BoxState(String value) {
             this.value = value;
         }

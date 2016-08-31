@@ -1,7 +1,9 @@
 package com.jiejing.locker.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -12,8 +14,10 @@ import javax.persistence.EntityListeners;
  * 箱子规格
  * Created by Bogle on 2016/8/29.
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "locker_box_size")
 @EntityListeners(AuditingEntityListener.class)
 public class BoxSize extends AbstractAuditingEntity<Integer> {
