@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>modules</module>
+        <module>standard</module>
     </modules>
     <packaging>pom</packaging>
 

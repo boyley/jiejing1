@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class CabinetServiceTest extends AbsServiceTest {
 
-    ObjectMapper mapper = new ObjectMapper();
+
 
     @Autowired
     private CabinetMapper cabinetMapper;

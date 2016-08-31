@@ -23,7 +23,7 @@ public abstract class CabinetMapper {
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
             @Mapping(source = "description", target = "description")
-//            ,@Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction2.class)
+            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction2.class)
     })
     public abstract CabinetDto cabinetToCabinetDto(Cabinet cabinet);
 
@@ -38,7 +38,7 @@ public abstract class CabinetMapper {
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
             @Mapping(source = "description", target = "description")
-//            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction3.class)
+            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction3.class)
     })
     public abstract Cabinet cabinetDtoToCabinet(CabinetDto cabinetDto);
 }
