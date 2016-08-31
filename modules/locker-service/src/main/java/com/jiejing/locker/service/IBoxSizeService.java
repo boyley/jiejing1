@@ -1,6 +1,7 @@
 package com.jiejing.locker.service;
 
 import com.jiejing.locker.domains.Box;
+import com.jiejing.locker.domains.BoxSize;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface IBoxSizeService {
 
     boolean exists(Integer id);
 
-    Iterable<Box> save(Iterable<Box> entities);
+
 
     /**
      * 查询柜子拥有的所有箱子规格列表信息
@@ -19,5 +20,5 @@ public interface IBoxSizeService {
      * @param cabinetId
      * @return
      */
-    List<Box> findAll(Integer cabinetId);
+    List<BoxSize> findAll(Integer cabinetId);
 }

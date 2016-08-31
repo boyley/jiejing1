@@ -3,6 +3,7 @@ package com.jiejing.locker.service.impl;
 import com.jiejing.locker.domains.Box;
 import com.jiejing.locker.domains.Cabinet;
 import com.jiejing.locker.repository.CabinetRepository;
+import com.jiejing.locker.service.IBoxService;
 import com.jiejing.locker.service.IBoxSizeService;
 import com.jiejing.locker.service.ICabinetService;
 import com.jiejing.locker.service.IRegionService;
@@ -19,7 +20,7 @@ public class CabinetServiceImpl implements ICabinetService {
     private CabinetRepository cabinetRepository;
 
     @Autowired
-    private IBoxSizeService boxSizeService;
+    private IBoxService boxService;
 
     @Autowired
     private IRegionService regionService;
@@ -47,7 +48,7 @@ public class CabinetServiceImpl implements ICabinetService {
                 box.setCabinetId(cabinet.getId());
             }
         }
-        this.boxSizeService.save(cabinet.getBoxs());
+        this.boxService.save(cabinet.getBoxs());
         return cabinet;
     }
 
