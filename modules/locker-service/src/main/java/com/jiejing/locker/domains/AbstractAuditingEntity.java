@@ -45,7 +45,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, length = 50, updatable = false)
-    private Integer createdBy;
+    private Integer createdBy = 0;
 
     @CreatedDate
     @Column(name = "created_date", nullable = false)
@@ -53,7 +53,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
 
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 50)
-    private Integer lastModifiedBy;
+    private Integer lastModifiedBy = 0;
 
     @LastModifiedDate
     @Column(name = "last_modified_date")

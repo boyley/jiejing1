@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper=false)
 public class CabinetDto implements Serializable {
 
+    private String id;
     private String code;
     private String name;
     private Integer regionId;//地址：道路/小区 编码

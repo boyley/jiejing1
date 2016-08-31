@@ -19,6 +19,7 @@ public abstract class CabinetMapper {
     private CabinetRepository cabinetRepository;
 
     @Mappings({
+            @Mapping(source = "id", target = "id"),
             @Mapping(source = "code", target = "code"),
             @Mapping(source = "name", target = "name"),
             @Mapping(source = "regionId", target = "regionId"),
@@ -31,7 +32,25 @@ public abstract class CabinetMapper {
     })
     public abstract CabinetDto cabinetToCabinetDto(Cabinet cabinet);
 
+    @Mappings({
+            @Mapping(source = "id", target = "id"),
+            @Mapping(source = "code", target = "code"),
+            @Mapping(source = "name", target = "name"),
+            @Mapping(source = "regionId", target = "regionId"),
+            @Mapping(source = "lon", target = "lon"),
+            @Mapping(source = "lat", target = "lat"),
+            @Mapping(source = "status", target = "status"),
+            @Mapping(source = "multiple", target = "multiple"),
+            @Mapping(source = "voucherVerify", target = "voucherVerify"),
+            @Mapping(source = "description", target = "description")
+    })
+    public abstract Cabinet cabinetDtoToCabinet(CabinetDto cabinetDto);
+
     public CabinetDto findOne(Integer id) {
         return this.cabinetToCabinetDto(this.cabinetRepository.findOne(id));
+    }
+
+    public CabinetDto save(CabinetDto cabinetDto) {
+        return this.cabinetToCabinetDto(this.cabinetRepository.save(this.cabinetDtoToCabinet(cabinetDto)));
     }
 }
