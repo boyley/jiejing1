@@ -1,6 +1,7 @@
 package com.jiejing.locker.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jiejing.locker.defines.Const;
 import com.jiejing.locker.service.dto.CabinetDto;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CabinetServiceTest extends AbsServiceTest {
         cabinet.setLat(new BigDecimal(3L));
         cabinet.setLon(new BigDecimal(3L));
         cabinet.setRegionId(1);
-        cabinet.setStatus(CabinetDto.Status.ENABLE);
+        cabinet.setStatus(Const.Status.ENABLE);
         mapper.writeValue(System.out,this.cabinetService.save(cabinet));
     }
 }
