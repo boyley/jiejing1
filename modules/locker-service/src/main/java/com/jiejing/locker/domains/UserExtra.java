@@ -33,7 +33,7 @@ public class UserExtra implements Persistable<Integer> {
     @JoinColumn(name = "cert_type", referencedColumnName = "id", nullable = false)
     private Dictionary certType;//证件类型（引用sys_dictionary）
 
-    @Column(name = "num", nullable = false)
+    @Column(name = "num", nullable = false,length = 200)
     private String num;//证件号
 
     @CreatedDate
@@ -43,6 +43,10 @@ public class UserExtra implements Persistable<Integer> {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
+
+    @Column(name = "url", nullable = false,length = 1000)
+    private String url;
+
 
     @Override
     public boolean isNew() {

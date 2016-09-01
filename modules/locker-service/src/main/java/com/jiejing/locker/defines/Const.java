@@ -5,6 +5,15 @@ package com.jiejing.locker.defines;
  */
 public interface Const {
 
+    enum OptType {
+        CX("存箱"), QX("取箱");
+        private String value;
+
+        OptType(String value) {
+            this.value = value;
+        }
+    }
+
     enum Status {
         ENABLE("启用"), DISENABLE("禁用"), ERROR("异常");
         private String value;

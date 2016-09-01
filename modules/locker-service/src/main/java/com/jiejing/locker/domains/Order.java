@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 public class Order extends AbstractAuditingEntity<Integer> {
 
 
-    @Column(name = "order_num", nullable = false)
+    @Column(name = "order_num", nullable = false,length = 32)
     private String orderNum;//订单id
 
     @Enumerated(EnumType.STRING)
@@ -31,8 +31,15 @@ public class Order extends AbstractAuditingEntity<Integer> {
     @Column(name = "order_source", nullable = true)
     private Integer orderSource;//下单渠道
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = false,precision=9, scale=2)
     private BigDecimal price;//费用
+
+    @Column(name = "pay_price", nullable = false,precision=9, scale=2)
+    private BigDecimal payPrice;//支付费用
+
+    @Column(name = "retreat_price", nullable = false, precision = 9, scale = 2)
+    private BigDecimal retreatrice;//找补费用
+
 
     @Column(name = "pay_type", nullable = true)
     private Integer payType;//支付方式,关联sys_dictionary表

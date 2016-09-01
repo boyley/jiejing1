@@ -26,7 +26,10 @@ public class Account implements Persistable<Integer> {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "phone_no", nullable = false)
+    @Column(name = "country_code", nullable = false,length = 10)
+    private String countryCode; // 国家代码
+
+    @Column(name = "phone_no", nullable = false,length = 32)
     private String phoneNo;
 
     @Override

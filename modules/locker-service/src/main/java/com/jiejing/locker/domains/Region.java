@@ -22,10 +22,10 @@ import javax.persistence.EntityListeners;
 @EntityListeners(AuditingEntityListener.class)
 public class Region extends AbstractAuditingEntity<Integer> {
 
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", nullable = false,length = 32)
     private String code;
 
-    @Column(name = "name", nullable = true)
+    @Column(name = "name", nullable = true,length = 32)
     private String name;
 
     @Column(name = "parent_id", nullable = false)
@@ -34,6 +34,6 @@ public class Region extends AbstractAuditingEntity<Integer> {
     @Column(name = "url", nullable = true)
     private String url;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = true,length = 1000)
     private String description;
 }

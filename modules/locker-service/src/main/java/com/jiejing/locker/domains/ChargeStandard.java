@@ -28,7 +28,7 @@ public class ChargeStandard extends AbstractAuditingEntity<Integer> {
     @Column(name = "box_size_id", nullable = true)
     private Integer boxSizeId;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = false,precision=9, scale=2)
     private BigDecimal price;//价格
 
     @Enumerated(EnumType.STRING)
@@ -38,6 +38,6 @@ public class ChargeStandard extends AbstractAuditingEntity<Integer> {
     @Column(name = "cycle_time", nullable = false)
     private Integer cycleTime;//收费周期（小时）
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = true,length = 1000)
     private String description;
 }

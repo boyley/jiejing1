@@ -42,7 +42,7 @@ public class User implements Persistable<Integer> {
     @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
     private Account account;
 
-    @Column(name = "name", nullable = true)
+    @Column(name = "name", nullable = true,length = 32)
     private String name;
 
     @Enumerated(EnumType.STRING)

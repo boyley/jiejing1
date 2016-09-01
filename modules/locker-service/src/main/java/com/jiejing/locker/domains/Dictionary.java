@@ -22,15 +22,15 @@ import javax.persistence.EntityListeners;
 @EntityListeners(AuditingEntityListener.class)
 public class Dictionary extends AbstractAuditingEntity<Integer> {
 
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", nullable = false,length = 32)
     private String code;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,length = 32)
     private String name;
-    @Column(name = "value_type", nullable = false)
+    @Column(name = "value_type", nullable = false,length = 32)
     private String valueType;//字典值类型
     @Column(name = "value", nullable = false)
     private String value;//字典值
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false,length = 1000)
     private String description;
 
     @Column(name = "parent_id", nullable = true)
