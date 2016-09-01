@@ -1,10 +1,8 @@
 package com.jiejing.locker.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jiejing.locker.defines.Const;
-import com.jiejing.locker.mapper.CabinetMapper;
-import com.jiejing.locker.service.dto.BoxDto;
-import com.jiejing.locker.service.dto.CabinetDto;
+import com.jiejing.locker.domains.Box;
+import com.jiejing.locker.domains.Cabinet;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,17 +16,12 @@ import java.util.Set;
  */
 public class CabinetServiceTest extends AbsServiceTest {
 
-
-
-    @Autowired
-    private CabinetMapper cabinetMapper;
-
     @Autowired
     public ICabinetService cabinetService;
 
     @Test
     public void save() throws IOException {
-        CabinetDto cabinet = new CabinetDto();
+        Cabinet cabinet = new Cabinet();
         cabinet.setCode("code");
         cabinet.setDescription("description");
         cabinet.setName("name");
@@ -37,7 +30,7 @@ public class CabinetServiceTest extends AbsServiceTest {
         cabinet.setRegionId(1);
         cabinet.setStatus(Const.Status.ENABLE);
 
-        BoxDto box = new BoxDto();
+        Box box = new Box();
         box.setCode("code");
         box.setDescription("description");
         box.setCabinetId(3);
@@ -46,16 +39,12 @@ public class CabinetServiceTest extends AbsServiceTest {
         box.setGateLockState(Const.GateLockState.CLOSE);
         box.setDepositState(Const.DepositState.Y);
         box.setStatus(Const.Status.ENABLE);
-        Set<BoxDto> boxDtos = new HashSet<>();
-        boxDtos.add(box);
-        cabinet.setBoxs(boxDtos);
+        Set<Box> boxs = new HashSet<>();
+        boxs.add(box);
+        cabinet.setBoxs(boxs);
 
-        mapper.writeValue(System.out, this.cabinetService.save(this.cabinetMapper.cabinetDtoToCabinet(cabinet)));
+        mapper.writeValue(System.out, this.cabinetService.save(cabinet));
     }
 
-    @Test
-    public void findOne() throws IOException {
-        CabinetDto cabinetDto = this.cabinetMapper.cabinetToCabinetDto(this.cabinetService.findOne(3));
-        mapper.writeValue(System.out, cabinetDto);
-    }
+
 }

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "action_log")
+@Entity(name = "locker_lease_info")
 @EntityListeners(AuditingEntityListener.class)
 public class ActionLog implements Persistable<Integer> {
 

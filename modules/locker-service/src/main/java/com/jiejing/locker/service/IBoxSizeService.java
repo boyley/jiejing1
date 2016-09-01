@@ -4,6 +4,8 @@ import com.jiejing.locker.domains.Box;
 import com.jiejing.locker.domains.BoxSize;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -20,5 +22,7 @@ public interface IBoxSizeService {
      * @param cabinetId
      * @return
      */
-    List<BoxSize> findAll(Integer cabinetId);
+    Optional<List<BoxSize>> findAll(Integer cabinetId);
+
+    Optional<BoxSize> findOne(Integer id);
 }

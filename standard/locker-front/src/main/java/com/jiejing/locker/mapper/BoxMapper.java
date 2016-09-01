@@ -2,8 +2,8 @@ package com.jiejing.locker.mapper;
 
 import com.jiejing.locker.domains.Box;
 import com.jiejing.locker.domains.Cabinet;
-import com.jiejing.locker.service.dto.BoxDto;
-import com.jiejing.locker.service.dto.CabinetDto;
+import com.jiejing.locker.web.dto.BoxDto;
+import com.jiejing.locker.web.dto.CabinetDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

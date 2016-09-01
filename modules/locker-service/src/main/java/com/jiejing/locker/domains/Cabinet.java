@@ -51,8 +51,8 @@ public class Cabinet extends AbstractAuditingEntity<Integer> {
     @Column(name = "close_time", nullable = false)
     private ZonedDateTime closeTime = ZonedDateTime.now();//关机时间
 
-    //    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
-    @Transient
+        @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
+//    @Transient
     private Set<Box> boxs;
 }

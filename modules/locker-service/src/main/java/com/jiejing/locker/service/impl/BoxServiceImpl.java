@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -22,8 +23,8 @@ public class BoxServiceImpl implements IBoxService {
     private BoxRepository boxRepository;
 
     @Override
-    public Box findOne(Integer id) {
-        return boxRepository.findOne(id);
+    public Optional<Box> findOne(Integer id) {
+        return boxRepository.findOneById(id);
     }
 
     @Override

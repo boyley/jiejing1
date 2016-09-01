@@ -28,7 +28,7 @@ public class Order extends AbstractAuditingEntity<Integer> {
     @Column(name = "order_state", nullable = true)
     private Const.OrderState orderState;//订单状态DZF:待支付，YZF：已支付，YQX：已取消，YWC：已完成,YGB:已关闭
 
-    @Column(name = "order_source", nullable = true)
+    @Column(name = "order_source", nullable = false)
     private Integer orderSource;//下单渠道
 
     @Column(name = "price", nullable = false,precision=9, scale=2)
@@ -37,7 +37,7 @@ public class Order extends AbstractAuditingEntity<Integer> {
     @Column(name = "pay_price", nullable = false,precision=9, scale=2)
     private BigDecimal payPrice;//支付费用
 
-    @Column(name = "retreat_price", nullable = false, precision = 9, scale = 2)
+    @Column(name = "retreat_price", nullable = true, precision = 9, scale = 2)
     private BigDecimal retreatrice;//找补费用
 
 
@@ -45,5 +45,5 @@ public class Order extends AbstractAuditingEntity<Integer> {
     private Integer payType;//支付方式,关联sys_dictionary表
 
     @Transient
-    private LeaseBox leaseBox;
+    private LeaseBox leaseBox = new LeaseBox();
 }

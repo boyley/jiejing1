@@ -18,7 +18,7 @@ import javax.persistence.EntityListeners;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "sys_region")
+@Entity(name = "locker_region")
 @EntityListeners(AuditingEntityListener.class)
 public class Region extends AbstractAuditingEntity<Integer> {
 

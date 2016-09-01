@@ -2,6 +2,8 @@ package com.jiejing.locker.service;
 
 import com.jiejing.locker.domains.Cabinet;
 
+import java.util.Optional;
+
 /**
  * Created by Bogle on 2016/8/30.
  */
@@ -14,5 +16,5 @@ public interface ICabinetService {
      */
     Cabinet save(Cabinet cabinet);
 
-    Cabinet findOne(Integer id);
+    Optional<Cabinet> findOne(Integer id);
 }

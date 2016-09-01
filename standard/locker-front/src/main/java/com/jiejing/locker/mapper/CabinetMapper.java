@@ -1,7 +1,8 @@
 package com.jiejing.locker.mapper;
 
 import com.jiejing.locker.domains.Cabinet;
-import com.jiejing.locker.service.dto.CabinetDto;
+import com.jiejing.locker.mapper.util.CabinetMapperUtil;
+import com.jiejing.locker.web.dto.CabinetDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -9,7 +10,7 @@ import org.mapstruct.Mappings;
 /**
  * Created by Bogle on 2016/8/31.
  */
-@Mapper(uses = CabinetMapperUtil.class, componentModel = "spring")
+@Mapper(uses =  CabinetMapperUtil.class, componentModel = "spring")
 public abstract class CabinetMapper {
 
     @Mappings({
@@ -23,7 +24,7 @@ public abstract class CabinetMapper {
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
             @Mapping(source = "description", target = "description")
-            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction2.class)
+            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction1.class)
     })
     public abstract CabinetDto cabinetToCabinetDto(Cabinet cabinet);
 
@@ -38,7 +39,7 @@ public abstract class CabinetMapper {
             @Mapping(source = "multiple", target = "multiple"),
             @Mapping(source = "voucherVerify", target = "voucherVerify"),
             @Mapping(source = "description", target = "description")
-            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction3.class)
+            , @Mapping(source = "boxs", target = "boxs", qualifiedBy = CabinetMapperUtil.Fraction2.class)
     })
     public abstract Cabinet cabinetDtoToCabinet(CabinetDto cabinetDto);
 }

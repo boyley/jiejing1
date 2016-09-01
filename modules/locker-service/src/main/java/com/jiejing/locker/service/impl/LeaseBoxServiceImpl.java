@@ -1,5 +1,6 @@
 package com.jiejing.locker.service.impl;
 
+import com.jiejing.locker.domains.LeaseBox;
 import com.jiejing.locker.service.ILeaseBoxService;
 import org.springframework.stereotype.Service;
 
@@ -9,5 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class LeaseBoxServiceImpl implements ILeaseBoxService {
 
-    p
+    @Override
+    public LeaseBox save(LeaseBox leaseBox) {
+        return null;
+    }
 }

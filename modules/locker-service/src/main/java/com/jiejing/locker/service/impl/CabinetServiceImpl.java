@@ -10,6 +10,8 @@ import com.jiejing.locker.service.IRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Created by Bogle on 2016/8/31.
  */
@@ -53,7 +55,7 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public Cabinet findOne(Integer id) {
-        return this.cabinetRepository.findOne(id);
+    public Optional<Cabinet> findOne(Integer id) {
+        return this.cabinetRepository.findOneById(id);
     }
 }

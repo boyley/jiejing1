@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -21,13 +23,18 @@ public class BoxSizeServiceImpl implements IBoxSizeService {
     private BoxSizeRepository boxSizeRepository;
 
     @Override
+    public Optional<BoxSize> findOne(Integer id) {
+        return boxSizeRepository.findOneById(id);
+    }
+
+    @Override
     public boolean exists(Integer id) {
         return boxSizeRepository.exists(id);
     }
 
 
     @Override
-    public List<BoxSize> findAll(Integer cabinetId) {
+    public Optional<List<BoxSize>> findAll(Integer cabinetId) {
         return this.boxSizeRepository.findAll(cabinetId);
     }
 }

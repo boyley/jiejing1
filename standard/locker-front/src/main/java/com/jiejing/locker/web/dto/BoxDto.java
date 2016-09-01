@@ -1,24 +1,19 @@
-package com.jiejing.locker.service.dto;
+package com.jiejing.locker.web.dto;
 
 import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 /**
  * Created by Bogle on 2016/8/31.
  */
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class BoxDto implements Serializable{
+public class BoxDto implements Serializable {
 
     private Integer id;
     private String code;

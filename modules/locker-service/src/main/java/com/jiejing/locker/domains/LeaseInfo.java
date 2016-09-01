@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "action_log")
+@Entity(name = "locker_lease_info")
 @EntityListeners(AuditingEntityListener.class)
 public class LeaseInfo implements Persistable<Integer> {
 
@@ -27,16 +27,16 @@ public class LeaseInfo implements Persistable<Integer> {
     private Integer actionId;//操作记录id
 
     @Column(name = "info_type", nullable = false)
-    private Integer infoType;//操作记录id
+    private Integer infoType;//资料类型（引用sys_dictionary）,存取动作
 
     @Column(name = "name", nullable = false, length = 30)
-    private Integer name;//资料名称
+    private String name;//资料名称
 
     @Column(name = "info_content", nullable = false, length = 1000)
-    private Integer info_Content;//资料内容
+    private String infoContent;//资料内容
 
     @Column(name = "info_file", nullable = false, length = 1000)
-    private Integer infoile;//资料文件
+    private String infoile;//资料文件
 
     @Override
     public Integer getId() {

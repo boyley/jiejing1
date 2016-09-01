@@ -11,6 +11,8 @@ import com.jiejing.locker.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Created by Bogle on 2016/8/31.
  */
@@ -31,20 +33,21 @@ public class OrderServiceImpl implements IOrderService {
      * @return
      */
     @Override
-    public Order save(Order order) {
+    public Order save(final Order order) {
         LeaseBox leaseBox = order.getLeaseBox();
         if(leaseBox == null) throw new RuntimeException("无存箱记录");
-        Box box = boxService.findOne(leaseBox.getBoxId());
-        if(box.getStatus() == Const.Status.ENABLE) throw new RuntimeException("禁用箱子");
-        if(box.getStatus() == Const.Status.ERROR) throw new RuntimeException("异常箱子");
-        if(box.getDepositState() == Const.DepositState.Y) throw new RuntimeException("使用中");
-        if(box.getDepositState() == Const.DepositState.ERROR) throw new RuntimeException("异常箱子");
-        order.setOrderState(Const.OrderState.DZF);
-        order.setOrderNum(orderNum());
-        order = this.orderRepository.save(order);
-        leaseBox.setOrderId(order.getId());
-        this.leaseBoxService.save
-        return null;
+        boxService.findOne(leaseBox.getBoxId()).ifPresent(box -> {
+            if(box.getStatus() == Const.Status.ENABLE) throw new RuntimeException("禁用箱子");
+            if(box.getStatus() == Const.Status.ERROR) throw new RuntimeException("异常箱子");
+            if(box.getDepositState() == Const.DepositState.Y) throw new RuntimeException("使用中");
+            if(box.getDepositState() == Const.DepositState.ERROR) throw new RuntimeException("异常箱子");
+            order.setOrderState(Const.OrderState.DZF);
+            order.setOrderNum(orderNum());
+            this.orderRepository.save(order);
+            leaseBox.setOrderId(order.getId());
+            this.leaseBoxService.save(leaseBox);
+        });
+        return order;
     }
 
     private String orderNum() {
