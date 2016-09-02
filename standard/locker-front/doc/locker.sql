@@ -10,76 +10,32 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-09-01 11:00:08
+Date: 2016-09-02 18:14:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for action_log
+-- Table structure for locker_action_log
 -- ----------------------------
-DROP TABLE IF EXISTS `action_log`;
-CREATE TABLE `action_log` (
-  `id` int(11) DEFAULT NULL COMMENT '主键',
-  `opt_type` enum('CX','QX') COLLATE utf8_bin DEFAULT NULL COMMENT '操作类型,CX:存箱，QX:取箱',
-  `lease_id` int(11) DEFAULT NULL COMMENT '租箱/取箱id'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作记录';
-
--- ----------------------------
--- Records of action_log
--- ----------------------------
-
--- ----------------------------
--- Table structure for lease_box
--- ----------------------------
-DROP TABLE IF EXISTS `lease_box`;
-CREATE TABLE `lease_box` (
+DROP TABLE IF EXISTS `locker_action_log`;
+CREATE TABLE `locker_action_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `created_by` int(11) DEFAULT NULL COMMENT '创建人',
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
-  `cabinet_id` int(11) DEFAULT NULL COMMENT '存储柜id',
-  `box_id` int(11) DEFAULT NULL COMMENT '存储箱id',
-  `box_size_id` int(11) DEFAULT NULL COMMENT '存储箱规格id',
-  `cabinet_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储柜名称',
-  `cabinet_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储柜编码',
-  `box_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储箱名称',
-  `box_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储箱名称',
-  `box_size_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储箱规格名称',
-  `box_size_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储箱规格编码',
-  `charge_type` enum('TIME_HOUR','TIME_CYCLE') COLLATE utf8_bin DEFAULT NULL COMMENT '收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）',
-  `cycle_time` int(11) DEFAULT NULL COMMENT '收费周期（小时）',
-  `price` decimal(9,2) DEFAULT NULL COMMENT '价格',
-  `order_id` int(11) DEFAULT NULL COMMENT '订单id',
-  `box_state` enum('DQ','YQ') COLLATE utf8_bin DEFAULT NULL COMMENT '箱状态DQ:待取，YQ：已取',
-  `check_type` int(11) DEFAULT NULL COMMENT '校验模式（引用sys_dictionary）',
-  `timeout` int(11) DEFAULT NULL COMMENT '是否超时寄存,大于0表示超时，具体数值表示超时值',
-  `fetch_time` datetime DEFAULT NULL COMMENT '取箱时间',
-  `retreat_id` int(11) DEFAULT NULL COMMENT '补单id',
+  `opt_type` enum('CX','QX') COLLATE utf8_bin DEFAULT NULL COMMENT '操作类型,CX:存箱，QX:取箱',
+  `lease_id` int(11) DEFAULT NULL COMMENT '租箱/取箱id',
+  `lease_info_id` int(11) DEFAULT NULL COMMENT '资料id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租箱记录';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作记录';
 
 -- ----------------------------
--- Records of lease_box
+-- Records of locker_action_log
 -- ----------------------------
-
--- ----------------------------
--- Table structure for lease_info
--- ----------------------------
-DROP TABLE IF EXISTS `lease_info`;
-CREATE TABLE `lease_info` (
-  `id` int(11) DEFAULT NULL COMMENT '主键',
-  `action_id` int(11) DEFAULT NULL COMMENT '操作记录id',
-  `info_type` int(11) DEFAULT NULL COMMENT '资料类型（引用sys_dictionary）',
-  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '资料名称',
-  `info_content` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料内容',
-  `info_file` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料文件'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租/取箱资料';
-
--- ----------------------------
--- Records of lease_info
--- ----------------------------
+INSERT INTO `locker_action_log` VALUES ('1', 'CX', '1', '1');
+INSERT INTO `locker_action_log` VALUES ('2', 'CX', '1', '2');
+INSERT INTO `locker_action_log` VALUES ('3', 'CX', '2', '3');
+INSERT INTO `locker_action_log` VALUES ('4', 'CX', '2', '4');
+INSERT INTO `locker_action_log` VALUES ('5', 'CX', '3', '5');
+INSERT INTO `locker_action_log` VALUES ('6', 'CX', '3', '6');
 
 -- ----------------------------
 -- Table structure for locker_box
@@ -87,6 +43,7 @@ CREATE TABLE `lease_info` (
 DROP TABLE IF EXISTS `locker_box`;
 CREATE TABLE `locker_box` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '箱子名称',
   `code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '箱子编号',
   `cabinet_id` int(11) DEFAULT NULL COMMENT '柜子外键',
   `box_size_id` int(11) DEFAULT NULL COMMENT '箱子规格外键',
@@ -95,37 +52,47 @@ CREATE TABLE `locker_box` (
   `created_by` int(11) DEFAULT NULL COMMENT '创建人',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
+  `last_modified_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
   `description` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
   `status` enum('ENABLE','DISENABLE','ERROR') COLLATE utf8_bin DEFAULT NULL COMMENT '是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='箱子信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='箱子信息表';
 
 -- ----------------------------
 -- Records of locker_box
 -- ----------------------------
+INSERT INTO `locker_box` VALUES ('1', 'box1', 'box1', '1', '2', 'CLOSE', 'Y', '0', '2016-09-01 15:02:42', '0', '2016-09-01 15:02:42', 'description', 'ENABLE');
+INSERT INTO `locker_box` VALUES ('2', 'box2', 'box2', '1', '3', 'OPEN', 'Y', '0', '2016-09-02 11:33:25', null, null, null, null);
+INSERT INTO `locker_box` VALUES ('3', 'box3', 'box3', '1', '4', 'OPEN', 'ERROR', '0', '2016-09-02 11:34:03', null, null, null, null);
+INSERT INTO `locker_box` VALUES ('4', 'box4', 'box4', '1', '2', 'CLOSE', 'Y', '0', '2016-09-01 15:02:42', '0', '2016-09-01 15:02:42', 'description', 'ENABLE');
+INSERT INTO `locker_box` VALUES ('5', 'box5', 'box5', '1', '3', 'OPEN', 'Y', '0', '2016-09-02 11:33:25', null, null, null, null);
+INSERT INTO `locker_box` VALUES ('6', 'box6', 'box6', '1', '4', 'OPEN', 'Y', '0', '2016-09-02 11:34:03', null, null, null, null);
+INSERT INTO `locker_box` VALUES ('7', 'box7', 'box7', '1', '5', 'OPEN', 'Y', '0', '2016-09-02 17:50:01', null, '2016-09-02 17:50:01', null, null);
 
 -- ----------------------------
--- Table structure for locker_box_size
+-- Table structure for locker_box_charge_standard
 -- ----------------------------
-DROP TABLE IF EXISTS `locker_box_size`;
-CREATE TABLE `locker_box_size` (
+DROP TABLE IF EXISTS `locker_box_charge_standard`;
+CREATE TABLE `locker_box_charge_standard` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '编码',
-  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '名称',
-  `description` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
+  `box_id` int(11) DEFAULT NULL COMMENT '箱子id',
+  `charge_standard_id` int(11) DEFAULT NULL COMMENT '收费标准id',
   `created_by` int(11) DEFAULT NULL COMMENT '创建人',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
+  `last_modified_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='箱子规格';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='收费关联表';
 
 -- ----------------------------
--- Records of locker_box_size
+-- Records of locker_box_charge_standard
 -- ----------------------------
-INSERT INTO `locker_box_size` VALUES ('1', 'code', 'name', 'description', '1', '2016-08-30 09:19:19', '1', '2016-08-30 09:19:19');
-INSERT INTO `locker_box_size` VALUES ('2', 'code', 'name', 'description', '1', '2016-08-30 17:30:49', '1', '2016-08-30 17:30:49');
+INSERT INTO `locker_box_charge_standard` VALUES ('1', '1', '1', '0', '2016-09-02 11:32:21', '0', '2016-09-02 11:32:21');
+INSERT INTO `locker_box_charge_standard` VALUES ('2', '2', '2', null, '2016-09-02 11:44:46', null, null);
+INSERT INTO `locker_box_charge_standard` VALUES ('3', '3', '3', null, '2016-09-02 11:44:53', null, null);
+INSERT INTO `locker_box_charge_standard` VALUES ('4', '4', '1', null, '2016-09-02 11:44:59', null, null);
+INSERT INTO `locker_box_charge_standard` VALUES ('5', '5', '2', null, '2016-09-02 11:45:08', null, null);
+INSERT INTO `locker_box_charge_standard` VALUES ('6', '6', '3', null, '2016-09-02 11:45:46', null, null);
 
 -- ----------------------------
 -- Table structure for locker_cabinet
@@ -145,15 +112,16 @@ CREATE TABLE `locker_cabinet` (
   `created_by` int(11) DEFAULT NULL COMMENT '创建人',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
-  `open_time` datetime DEFAULT NULL COMMENT '开机时间',
-  `close_time` datetime DEFAULT NULL COMMENT '关机时间',
+  `last_modified_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
+  `open_time` datetime NOT NULL COMMENT '开机时间',
+  `close_time` datetime NOT NULL COMMENT '关机时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='柜子信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='柜子信息表';
 
 -- ----------------------------
 -- Records of locker_cabinet
 -- ----------------------------
+INSERT INTO `locker_cabinet` VALUES ('1', 'code', 'name', '1', '3.00000', '3.00000', 'ENABLE', '0', '0', 'description', '0', '2016-09-01 15:02:42', '0', '2016-09-01 15:02:42', '2016-09-01 15:02:42', '2016-09-01 15:02:42');
 
 -- ----------------------------
 -- Table structure for locker_charge_standard
@@ -161,8 +129,6 @@ CREATE TABLE `locker_cabinet` (
 DROP TABLE IF EXISTS `locker_charge_standard`;
 CREATE TABLE `locker_charge_standard` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `cabinet_id` int(11) DEFAULT NULL COMMENT '柜子外键',
-  `box_size_id` int(11) DEFAULT NULL COMMENT '箱子规格外键',
   `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
   `charge_type` enum('TIME_HOUR','TIME_CYCLE') COLLATE utf8_bin DEFAULT NULL COMMENT '收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）',
   `cycle_time` int(11) DEFAULT NULL COMMENT '收费周期（小时）',
@@ -171,31 +137,17 @@ CREATE TABLE `locker_charge_standard` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
   `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
+  `default_box_size` int(11) DEFAULT NULL COMMENT '默认收费规格',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='收费标准';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='收费标准';
 
 -- ----------------------------
 -- Records of locker_charge_standard
 -- ----------------------------
-
--- ----------------------------
--- Table structure for locker_fetch_box
--- ----------------------------
-DROP TABLE IF EXISTS `locker_fetch_box`;
-CREATE TABLE `locker_fetch_box` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `created_by` int(11) DEFAULT NULL COMMENT '创建人',
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
-  `lease_box_id` int(11) DEFAULT NULL COMMENT '租箱记录id',
-  `order_id` int(11) DEFAULT NULL COMMENT '补单id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='取箱记录';
-
--- ----------------------------
--- Records of locker_fetch_box
--- ----------------------------
+INSERT INTO `locker_charge_standard` VALUES ('1', '30.00', 'TIME_CYCLE', '3', '小箱默认收费标准', '0', '2016-09-02 11:31:34', '0', '2016-09-02 11:31:34', '2');
+INSERT INTO `locker_charge_standard` VALUES ('2', '40.00', 'TIME_CYCLE', '4', '中箱默认收费标准', '0', '2016-09-02 11:43:55', null, null, '3');
+INSERT INTO `locker_charge_standard` VALUES ('3', '50.00', 'TIME_HOUR', '5', '大箱默认收费标准', '0', '2016-09-02 11:44:08', null, null, '4');
+INSERT INTO `locker_charge_standard` VALUES ('4', '70.00', 'TIME_CYCLE', '5', '超大箱默认收费标准', '0', '2016-09-02 11:52:33', null, null, '5');
 
 -- ----------------------------
 -- Table structure for locker_lease_box
@@ -210,6 +162,7 @@ CREATE TABLE `locker_lease_box` (
   `cabinet_id` int(11) DEFAULT NULL COMMENT '存储柜id',
   `box_id` int(11) DEFAULT NULL COMMENT '存储箱id',
   `box_size_id` int(11) DEFAULT NULL COMMENT '存储箱规格id',
+  `charge_standard_id` int(11) DEFAULT NULL COMMENT '计费标准id',
   `cabinet_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储柜名称',
   `cabinet_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储柜编码',
   `box_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '存储箱名称',
@@ -221,16 +174,43 @@ CREATE TABLE `locker_lease_box` (
   `price` decimal(9,2) DEFAULT NULL COMMENT '价格',
   `order_id` int(11) DEFAULT NULL COMMENT '订单id',
   `box_state` enum('DQ','YQ') COLLATE utf8_bin DEFAULT NULL COMMENT '箱状态DQ:待取，YQ：已取',
-  `cert_type` int(11) DEFAULT NULL COMMENT '证件类型（引用sys_dictionary）',
-  `num` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '取箱证件号',
-  `pwd` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '取箱密码',
+  `check_type` int(11) DEFAULT NULL COMMENT '校验模式（引用sys_dictionary）',
   `timeout` int(11) DEFAULT NULL COMMENT '是否超时寄存,大于0表示超时，具体数值表示超时值',
+  `fetch_time` datetime DEFAULT NULL COMMENT '取箱时间',
+  `retreat_id` int(11) DEFAULT NULL COMMENT '补单id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租箱记录';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租箱记录';
 
 -- ----------------------------
 -- Records of locker_lease_box
 -- ----------------------------
+INSERT INTO `locker_lease_box` VALUES ('1', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '1', '2', '1', 'name', 'code', 'box1', 'box1', '小', 'Small', 'TIME_CYCLE', '3', '30.00', '1', 'DQ', '1', null, null, null);
+INSERT INTO `locker_lease_box` VALUES ('2', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '1', '2', '1', 'name', 'code', 'box1', 'box1', '小', 'Small', 'TIME_CYCLE', '3', '30.00', '3', 'DQ', '1', null, null, null);
+INSERT INTO `locker_lease_box` VALUES ('3', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '2', '3', '2', 'name', 'code', 'box2', 'box2', '中', 'Medium', 'TIME_CYCLE', '4', '40.00', '5', 'DQ', '1', null, null, null);
+
+-- ----------------------------
+-- Table structure for locker_lease_info
+-- ----------------------------
+DROP TABLE IF EXISTS `locker_lease_info`;
+CREATE TABLE `locker_lease_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `info_type` int(11) DEFAULT NULL COMMENT '资料类型（引用sys_dictionary）',
+  `code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '证件类型code',
+  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '资料名称',
+  `info_content` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料内容',
+  `info_file` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料文件',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租/取箱资料';
+
+-- ----------------------------
+-- Records of locker_lease_info
+-- ----------------------------
+INSERT INTO `locker_lease_info` VALUES ('1', '8', 'HZ', '护照', '188888888888881', null);
+INSERT INTO `locker_lease_info` VALUES ('2', '9', 'EWM', '二维码', '188888888888882', null);
+INSERT INTO `locker_lease_info` VALUES ('3', '8', 'HZ', '护照', '188888888888881', null);
+INSERT INTO `locker_lease_info` VALUES ('4', '9', 'EWM', '二维码', '188888888888882', null);
+INSERT INTO `locker_lease_info` VALUES ('5', '8', 'HZ', '护照', '188888888888881', null);
+INSERT INTO `locker_lease_info` VALUES ('6', '9', 'EWM', '二维码', '188888888888882', null);
 
 -- ----------------------------
 -- Table structure for locker_order_handle
@@ -294,7 +274,7 @@ CREATE TABLE `sys_account` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dictionary`;
 CREATE TABLE `sys_dictionary` (
-  `id` int(11) DEFAULT NULL COMMENT '主键',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '字典编码',
   `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '字典名称',
   `value_type` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '字典值类型',
@@ -303,13 +283,26 @@ CREATE TABLE `sys_dictionary` (
   `created_by` int(11) DEFAULT NULL COMMENT '创建人',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
-  `last_modified_date` datetime DEFAULT NULL COMMENT '最后一次更新时间',
-  `parent_id` int(11) DEFAULT NULL COMMENT '父节点id'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
+  `last_modified_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父节点id',
+  `parent_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '父节点code',
+  `editable` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否可编辑',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
 
 -- ----------------------------
 -- Records of sys_dictionary
 -- ----------------------------
+INSERT INTO `sys_dictionary` VALUES ('1', 'box_size', '箱子规格', 'array', 'BOX_SIZE', '箱子规格，大，小，中，超大', null, '2016-09-02 11:37:12', null, null, null, null, '\0');
+INSERT INTO `sys_dictionary` VALUES ('2', 'Small', '小', 'String', 'Small', '35mm*15mm*10mm', null, '2016-09-02 11:38:11', null, null, '1', 'box_size', '\0');
+INSERT INTO `sys_dictionary` VALUES ('3', 'Medium', '中', 'String', 'Medium', '55mm*35mm*20mm', null, '2016-09-02 11:38:33', null, null, '1', 'box_size', '\0');
+INSERT INTO `sys_dictionary` VALUES ('4', 'Large', '大', 'String', 'Large', '75mm*55mm*40mm', null, '2016-09-02 11:38:54', null, null, '1', 'box_size', '\0');
+INSERT INTO `sys_dictionary` VALUES ('5', 'XLarge', '超大', 'String', 'XLarge', '95mm*75mm*60mm', null, '2016-09-02 11:53:16', null, '2016-09-02 11:53:16', null, 'box_size', '\0');
+INSERT INTO `sys_dictionary` VALUES ('6', 'Info_type', '资料信息', 'String', 'Info', '护照，身份证，手机号，二维码等等资料信息', null, '2016-09-02 16:56:54', null, '2016-09-02 16:56:54', null, null, '\0');
+INSERT INTO `sys_dictionary` VALUES ('7', 'SFZ', '身份证', 'String', 'SFZ', '身份证', null, '2016-09-02 16:57:36', null, '2016-09-02 16:57:36', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('8', 'HZ', '护照', 'String', 'HZ', '护照', null, '2016-09-02 17:15:20', null, '2016-09-02 17:15:20', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('9', 'EWM', '二维码', 'String', 'EWM', '二维码', null, '2016-09-02 17:15:36', null, '2016-09-02 17:15:36', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('10', 'PWD', '密码', 'String', 'PWD', '密码', null, '2016-09-02 17:16:25', null, '2016-09-02 17:16:25', null, 'Info_type', '\0');
 
 -- ----------------------------
 -- Table structure for sys_order
@@ -329,11 +322,14 @@ CREATE TABLE `sys_order` (
   `retreat_price` decimal(9,2) DEFAULT NULL COMMENT '找补金额',
   `pay_type` int(11) DEFAULT NULL COMMENT '支付方式,关联sys_dictionary表',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
 
 -- ----------------------------
 -- Records of sys_order
 -- ----------------------------
+INSERT INTO `sys_order` VALUES ('1', '1472809260875', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '30.00', '30.00', '0.00', null);
+INSERT INTO `sys_order` VALUES ('3', '1472809562281', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '30.00', '30.00', '0.00', null);
+INSERT INTO `sys_order` VALUES ('5', '1472809607802', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '40.00', '50.00', '10.00', null);
 
 -- ----------------------------
 -- Table structure for sys_user
