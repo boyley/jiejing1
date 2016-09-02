@@ -79,5 +79,4 @@ public interface Const {
             return value;
         }
     }
-
 }

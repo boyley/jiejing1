@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -31,6 +32,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     private Integer createdBy = 0;
 
     @CreatedDate
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     @Column(name = "created_date", nullable = false)
     private ZonedDateTime createdDate = ZonedDateTime.now();
 
@@ -40,6 +42,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
 
     @LastModifiedDate
     @Column(name = "last_modified_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
 
     @Override

@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -40,7 +41,7 @@ public class Order extends AbstractAuditingEntity<Integer> {
     @Column(name = "retreat_price", nullable = true, precision = 9, scale = 2)
     private BigDecimal retreatrice;//找补费用
 
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "pay_type", nullable = true)
     private Integer payType;//支付方式,关联sys_dictionary表
 

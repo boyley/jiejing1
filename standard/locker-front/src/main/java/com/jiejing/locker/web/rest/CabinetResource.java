@@ -20,10 +20,20 @@ public class CabinetResource {
     @Autowired
     private ICabinetService cabinetService;
 
+
+    @RequestMapping(value = "/boxSize/{id:\\d+}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getBoxSize(@PathVariable("id") Integer id) {
+        return cabinetService.findBoxSize(id)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @RequestMapping(value = "/{id:\\d+}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getCabinetBoxSize(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> getCabinet(@PathVariable("id") Integer id) {
         return cabinetService.findOne(id)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

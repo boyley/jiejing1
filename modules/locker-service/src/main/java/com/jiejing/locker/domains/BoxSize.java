@@ -1,33 +1,23 @@
 package com.jiejing.locker.domains;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
- * 箱子规格
- * Created by Bogle on 2016/8/29.
+ * Created by Bogle on 2016/9/2.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_box_size")
-@EntityListeners(AuditingEntityListener.class)
-public class BoxSize extends AbstractAuditingEntity<Integer> {
+public class BoxSize implements Serializable {
 
-    @Column(name = "code", nullable = false)
-    private String code;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "description", nullable = true)
-    private String description;
+    private Integer id;// 收费标准id
+    private String code; // 规格编码
+    private String name;// 规格名称
+    private BigDecimal price;//价格
+    private String description;//描述
 }

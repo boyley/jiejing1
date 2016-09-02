@@ -2,6 +2,7 @@ package com.jiejing.locker.service;
 
 import com.jiejing.locker.defines.Const;
 import com.jiejing.locker.domains.Box;
+import com.jiejing.locker.domains.BoxSize;
 import com.jiejing.locker.domains.Cabinet;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -34,7 +39,6 @@ public class CabinetServiceTest extends AbsServiceTest {
         box.setCode("code");
         box.setDescription("description");
         box.setCabinetId(3);
-        box.setBoxSizeId(1);
 
         box.setGateLockState(Const.GateLockState.CLOSE);
         box.setDepositState(Const.DepositState.Y);
@@ -46,5 +50,9 @@ public class CabinetServiceTest extends AbsServiceTest {
         mapper.writeValue(System.out, this.cabinetService.save(cabinet));
     }
 
-
+    @Test
+    public void findBoxSize() {
+        Optional<List<BoxSize>> list =  this.cabinetService.findBoxSize(1);
+        printlnJson(list);
+    }
 }

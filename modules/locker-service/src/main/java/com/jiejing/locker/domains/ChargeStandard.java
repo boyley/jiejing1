@@ -22,12 +22,6 @@ import java.math.BigDecimal;
 @EntityListeners(AuditingEntityListener.class)
 public class ChargeStandard extends AbstractAuditingEntity<Integer> {
 
-    @Column(name = "cabinet_id", nullable = true, unique = true)
-    private Integer cabinetId;
-
-    @Column(name = "box_size_id", nullable = true)
-    private Integer boxSizeId;
-
     @Column(name = "price", nullable = false,precision=9, scale=2)
     private BigDecimal price;//价格
 
@@ -40,4 +34,7 @@ public class ChargeStandard extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "description", nullable = true,length = 1000)
     private String description;
+
+    @Column(name = "default_box_size", nullable = false)
+    private Integer defaultBoxSize;
 }

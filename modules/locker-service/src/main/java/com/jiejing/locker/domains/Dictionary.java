@@ -35,4 +35,7 @@ public class Dictionary extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "parent_id", nullable = true)
     private Integer parentId;//父节点id
+
+    @Column(name = "parent_code", nullable = false,length = 32)
+    private String parentCode;//parent_code
 }

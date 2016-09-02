@@ -9,5 +9,5 @@ import java.util.Optional;
  */
 public interface IOrderService {
 
-    Order save(Order order);
+    Optional<Order> save(Order order);
 }

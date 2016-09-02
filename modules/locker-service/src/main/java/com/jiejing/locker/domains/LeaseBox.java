@@ -1,8 +1,8 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -30,7 +30,10 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
     private Integer boxId;
 
     @Column(name = "box_size_id", nullable = false)
-    private Integer boxIizeId;
+    private Integer boxSizeId;
+
+    @Column(name = "charge_standard_id", nullable = false)
+    private Integer chargeStandardId;
 
     @Column(name = "cabinet_name", nullable = false, length = 32)
     private String cabinetName;
@@ -70,19 +73,15 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
     @Column(name = "check_type", nullable = false)
     private Integer checkType;//校验模式（引用sys_dictionary）
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "timeout", nullable = true)
     private Integer timeout;//是否超时寄存,大于0表示超时，具体数值表示超时值
 
-    @Column(name = "num", nullable = false, length = 200)
-    private String num;//取箱证件号
-
-    @Column(name = "pwd", nullable = false, length = 32)
-    private String pwd;//取箱密码
-
-    @CreatedDate
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "fetch_time", nullable = true)
-    private ZonedDateTime fetchime = ZonedDateTime.now();//取箱时间
+    private ZonedDateTime fetchime;//取箱时间
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "retreat_id", nullable = true)
     private Integer retreatd;//补单id
 

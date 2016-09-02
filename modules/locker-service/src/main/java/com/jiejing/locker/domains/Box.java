@@ -19,7 +19,9 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Box extends AbstractAuditingEntity<Integer> {
 
-    @Column(name = "code", nullable = false,length = 32)
+    @Column(name = "name", nullable = false, length = 32)
+    private String name;
+    @Column(name = "code", nullable = false, length = 32)
     private String code;
     @Column(name = "cabinet_id", nullable = false)
     private Integer cabinetId;
@@ -31,9 +33,13 @@ public class Box extends AbstractAuditingEntity<Integer> {
     @Enumerated(EnumType.STRING)
     @Column(name = "deposit_state", nullable = true)
     private Const.DepositState depositState;//存物状态Y:有存物，N：无存物，ERROR：异常
-    @Column(name = "description", nullable = true,length = 1000)
+    @Column(name = "description", nullable = true, length = 1000)
     private String description;
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Const.Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
+//    @ManyToOne
+//    @JoinColumn(name = "box_size_id", referencedColumnName = "id")
+//    private BoxSize boxSize;//箱子规格
+
 }

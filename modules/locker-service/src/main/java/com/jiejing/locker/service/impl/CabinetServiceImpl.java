@@ -1,16 +1,18 @@
 package com.jiejing.locker.service.impl;
 
 import com.jiejing.locker.domains.Box;
+import com.jiejing.locker.domains.BoxSize;
 import com.jiejing.locker.domains.Cabinet;
 import com.jiejing.locker.repository.CabinetRepository;
 import com.jiejing.locker.service.IBoxService;
-import com.jiejing.locker.service.IBoxSizeService;
 import com.jiejing.locker.service.ICabinetService;
 import com.jiejing.locker.service.IRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by Bogle on 2016/8/31.
@@ -57,5 +59,10 @@ public class CabinetServiceImpl implements ICabinetService {
     @Override
     public Optional<Cabinet> findOne(Integer id) {
         return this.cabinetRepository.findOneById(id);
+    }
+
+    @Override
+    public Optional<List<BoxSize>> findBoxSize(int id) {
+        return Optional.ofNullable(cabinetRepository.findBoxSize(id));
     }
 }
