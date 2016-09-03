@@ -24,4 +24,5 @@ public class BoxSize implements Serializable {
     private String name;// 规格名称
     private BigDecimal price;//价格
     private String description;//描述
+    private Integer cabinetId;
 }
