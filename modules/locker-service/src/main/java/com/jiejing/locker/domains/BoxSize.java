@@ -2,6 +2,8 @@ package com.jiejing.locker.domains;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -13,8 +15,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@Entity(name = "view_box_size")
 public class BoxSize implements Serializable {
 
+    @Id
     private Integer id;// 收费标准id
     private String code; // 规格编码
     private String name;// 规格名称

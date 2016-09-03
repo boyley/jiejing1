@@ -8,5 +8,5 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 /**
  * Created by Bogle on 2016/9/2.
  */
-public interface BoxChargeStandardRepository extends JpaRepository<BoxChargeStandard, Integer>, QueryDslPredicateExecutor<BoxChargeStandard> {
+public interface BoxChargeStandardRepository extends JpaRepository<BoxChargeStandard, Integer> {
 }

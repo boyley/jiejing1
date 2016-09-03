@@ -7,5 +7,5 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 /**
  * Created by Bogle on 2016/8/31.
  */
-public interface OrderRepository extends JpaRepository<Order, Integer>, QueryDslPredicateExecutor<Order> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 }
