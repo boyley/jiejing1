@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
@@ -17,6 +18,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "locker_lease_info")
+@JsonIgnoreProperties(value = {"id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 @EntityListeners(AuditingEntityListener.class)
 public class LeaseInfo implements Persistable<Integer> {
 
@@ -27,7 +29,7 @@ public class LeaseInfo implements Persistable<Integer> {
     @Column(name = "info_type", nullable = false)
     private Integer infoType;//资料类型（引用sys_dictionary）,存取动作
 
-    @Column(name = "code", nullable = false,length = 32)
+    @Column(name = "code", nullable = false, length = 32)
     private String code;
 
     @Column(name = "name", nullable = false, length = 30)

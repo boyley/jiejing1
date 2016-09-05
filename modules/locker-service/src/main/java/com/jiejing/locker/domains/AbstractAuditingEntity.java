@@ -1,6 +1,7 @@
 package com.jiejing.locker.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,6 +18,7 @@ import java.time.ZonedDateTime;
  * last modified by date.
  */
 @MappedSuperclass
+@JsonIgnoreProperties(value = {"createdBy","createdDate","lastModifiedBy","lastModifiedDate"})
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity<ID extends Serializable> implements Persistable<ID>, Serializable {
 

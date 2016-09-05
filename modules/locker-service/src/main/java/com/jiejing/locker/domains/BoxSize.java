@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties("cabinetId")
 @Entity(name = "view_box_size")
 public class BoxSize implements Serializable {
 

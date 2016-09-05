@@ -62,7 +62,6 @@ public class CabinetServiceImpl implements ICabinetService {
 
     @Override
     public Optional<List<BoxSize>> findBoxSize(int id) {
-//        return Optional.ofNullable(cabinetRepository.findBoxSize(id));
-        return null;
+        return Optional.ofNullable(cabinetRepository.findBoxSize(id));
     }
 }

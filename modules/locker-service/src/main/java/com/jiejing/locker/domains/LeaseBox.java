@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
 import lombok.*;
@@ -21,6 +22,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "locker_lease_box")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate","price","orderId","boxState"})
 public class LeaseBox extends AbstractAuditingEntity<Integer> {
 
     @Column(name = "cabinet_id", nullable = false)

@@ -1,4 +1,4 @@
-DROP view view_box_size
+DROP view IF EXISTS view_box_size
 CREATE VIEW view_box_size	 AS
 SELECT DISTINCT
 	locker_charge_standard.id,
