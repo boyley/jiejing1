@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-09-02 18:14:03
+Date: 2016-09-05 18:03:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,17 +25,13 @@ CREATE TABLE `locker_action_log` (
   `lease_id` int(11) DEFAULT NULL COMMENT '租箱/取箱id',
   `lease_info_id` int(11) DEFAULT NULL COMMENT '资料id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作记录';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作记录';
 
 -- ----------------------------
 -- Records of locker_action_log
 -- ----------------------------
 INSERT INTO `locker_action_log` VALUES ('1', 'CX', '1', '1');
 INSERT INTO `locker_action_log` VALUES ('2', 'CX', '1', '2');
-INSERT INTO `locker_action_log` VALUES ('3', 'CX', '2', '3');
-INSERT INTO `locker_action_log` VALUES ('4', 'CX', '2', '4');
-INSERT INTO `locker_action_log` VALUES ('5', 'CX', '3', '5');
-INSERT INTO `locker_action_log` VALUES ('6', 'CX', '3', '6');
 
 -- ----------------------------
 -- Table structure for locker_box
@@ -48,7 +44,7 @@ CREATE TABLE `locker_box` (
   `cabinet_id` int(11) DEFAULT NULL COMMENT '柜子外键',
   `box_size_id` int(11) DEFAULT NULL COMMENT '箱子规格外键',
   `gate_lock_state` enum('OPEN','CLOSE','ERROR') COLLATE utf8_bin DEFAULT NULL COMMENT '门锁状态;OPEN:打开，CLOSE:关闭，ERROR：异常',
-  `deposit_state` enum('Y','N','ERROR') COLLATE utf8_bin DEFAULT NULL COMMENT '存物状态Y:有存物，N：无存物，ERROR：异常',
+  `deposit_state` enum('Y','N','ERROR','ZY') COLLATE utf8_bin DEFAULT NULL COMMENT '存物状态Y:有存物，N：无存物，ERROR：异常,ZY:占用',
   `created_by` int(11) DEFAULT NULL COMMENT '创建人',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_by` int(11) DEFAULT NULL COMMENT '最后的更新人',
@@ -173,20 +169,18 @@ CREATE TABLE `locker_lease_box` (
   `cycle_time` int(11) DEFAULT NULL COMMENT '收费周期（小时）',
   `price` decimal(9,2) DEFAULT NULL COMMENT '价格',
   `order_id` int(11) DEFAULT NULL COMMENT '订单id',
-  `box_state` enum('DQ','YQ') COLLATE utf8_bin DEFAULT NULL COMMENT '箱状态DQ:待取，YQ：已取',
+  `box_state` enum('DQ','YQ','ZY') COLLATE utf8_bin DEFAULT NULL COMMENT '箱状态DQ:待取，YQ：已取,ZY:占用',
   `check_type` int(11) DEFAULT NULL COMMENT '校验模式（引用sys_dictionary）',
   `timeout` int(11) DEFAULT NULL COMMENT '是否超时寄存,大于0表示超时，具体数值表示超时值',
   `fetch_time` datetime DEFAULT NULL COMMENT '取箱时间',
   `retreat_id` int(11) DEFAULT NULL COMMENT '补单id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租箱记录';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租箱记录';
 
 -- ----------------------------
 -- Records of locker_lease_box
 -- ----------------------------
-INSERT INTO `locker_lease_box` VALUES ('1', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '1', '2', '1', 'name', 'code', 'box1', 'box1', '小', 'Small', 'TIME_CYCLE', '3', '30.00', '1', 'DQ', '1', null, null, null);
-INSERT INTO `locker_lease_box` VALUES ('2', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '1', '2', '1', 'name', 'code', 'box1', 'box1', '小', 'Small', 'TIME_CYCLE', '3', '30.00', '3', 'DQ', '1', null, null, null);
-INSERT INTO `locker_lease_box` VALUES ('3', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', '1', '2', '3', '2', 'name', 'code', 'box2', 'box2', '中', 'Medium', 'TIME_CYCLE', '4', '40.00', '5', 'DQ', '1', null, null, null);
+INSERT INTO `locker_lease_box` VALUES ('1', '0', '2016-09-05 14:25:44', '0', '2016-09-05 14:25:44', '1', '1', '2', '1', 'name', 'code', 'box1', 'box1', '小', 'Small', 'TIME_CYCLE', '3', '30.00', '1', 'DQ', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for locker_lease_info
@@ -200,17 +194,13 @@ CREATE TABLE `locker_lease_info` (
   `info_content` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料内容',
   `info_file` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '资料文件',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租/取箱资料';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租/取箱资料';
 
 -- ----------------------------
 -- Records of locker_lease_info
 -- ----------------------------
-INSERT INTO `locker_lease_info` VALUES ('1', '8', 'HZ', '护照', '188888888888881', null);
-INSERT INTO `locker_lease_info` VALUES ('2', '9', 'EWM', '二维码', '188888888888882', null);
-INSERT INTO `locker_lease_info` VALUES ('3', '8', 'HZ', '护照', '188888888888881', null);
-INSERT INTO `locker_lease_info` VALUES ('4', '9', 'EWM', '二维码', '188888888888882', null);
-INSERT INTO `locker_lease_info` VALUES ('5', '8', 'HZ', '护照', '188888888888881', null);
-INSERT INTO `locker_lease_info` VALUES ('6', '9', 'EWM', '二维码', '188888888888882', null);
+INSERT INTO `locker_lease_info` VALUES ('1', '8', 'HZ', '护照', '{\"name:\":\"张三\",\"no\":\"51000000000000xxxx\"}', null);
+INSERT INTO `locker_lease_info` VALUES ('2', '7', 'SFZ', '身份证', '{\"name:\":\"张三\",\"no\":\"51000000000000xxxx\"}', null);
 
 -- ----------------------------
 -- Table structure for locker_order_handle
@@ -288,7 +278,7 @@ CREATE TABLE `sys_dictionary` (
   `parent_code` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '父节点code',
   `editable` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否可编辑',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
 
 -- ----------------------------
 -- Records of sys_dictionary
@@ -301,8 +291,21 @@ INSERT INTO `sys_dictionary` VALUES ('5', 'XLarge', '超大', 'String', 'XLarge'
 INSERT INTO `sys_dictionary` VALUES ('6', 'Info_type', '资料信息', 'String', 'Info', '护照，身份证，手机号，二维码等等资料信息', null, '2016-09-02 16:56:54', null, '2016-09-02 16:56:54', null, null, '\0');
 INSERT INTO `sys_dictionary` VALUES ('7', 'SFZ', '身份证', 'String', 'SFZ', '身份证', null, '2016-09-02 16:57:36', null, '2016-09-02 16:57:36', null, 'Info_type', '\0');
 INSERT INTO `sys_dictionary` VALUES ('8', 'HZ', '护照', 'String', 'HZ', '护照', null, '2016-09-02 17:15:20', null, '2016-09-02 17:15:20', null, 'Info_type', '\0');
-INSERT INTO `sys_dictionary` VALUES ('9', 'EWM', '二维码', 'String', 'EWM', '二维码', null, '2016-09-02 17:15:36', null, '2016-09-02 17:15:36', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('9', 'RECEIPT', '小票', 'String', 'RECEIPT', '小票', null, '2016-09-02 17:15:36', null, '2016-09-02 17:15:36', null, 'Info_type', '\0');
 INSERT INTO `sys_dictionary` VALUES ('10', 'PWD', '密码', 'String', 'PWD', '密码', null, '2016-09-02 17:16:25', null, '2016-09-02 17:16:25', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('11', 'SJH', '手机号', 'String', 'SJH', '手机号', null, '2016-09-05 14:00:17', null, '2016-09-05 14:00:17', null, 'Info_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('12', 'order_source', '下单渠道', 'String', 'order_source', '下单渠道', null, '2016-09-05 14:43:39', null, '2016-09-05 14:43:39', null, null, '\0');
+INSERT INTO `sys_dictionary` VALUES ('13', 'APP', 'APP', 'String', 'APP', 'APP', null, '2016-09-05 14:44:19', null, '2016-09-05 14:44:19', '12', 'order_source', '\0');
+INSERT INTO `sys_dictionary` VALUES ('14', 'WeChat', '微信', 'String', 'WeChat', '微信', null, '2016-09-05 14:44:39', null, '2016-09-05 14:44:39', '12', 'order_source', '\0');
+INSERT INTO `sys_dictionary` VALUES ('15', 'GKD', '工控端', 'String', 'GKD', '工控端', null, '2016-09-05 14:44:50', null, '2016-09-05 14:44:50', '12', 'order_source', '\0');
+INSERT INTO `sys_dictionary` VALUES ('16', 'pay_type', '支付类型', 'String', 'pay_type', '支付类型', null, '2016-09-05 14:46:26', null, '2016-09-05 14:46:26', null, null, '\0');
+INSERT INTO `sys_dictionary` VALUES ('17', 'XJPAY', '现金支付', 'String', 'XJPAY', '现金支付', null, '2016-09-05 14:47:35', null, '2016-09-05 14:47:35', '16', 'pay_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('18', 'WXPAY', '微信支付', 'String', 'WXPAY', '微信支付', null, '2016-09-05 14:48:13', null, '2016-09-05 14:48:13', '16', 'pay_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('19', 'ALIPAY', '支付宝支付', 'String', 'ALIPAY', '支付宝支付', null, '2016-09-05 14:49:25', null, '2016-09-05 14:49:25', '16', 'pay_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('20', 'fethc_type', '提取验证', 'String', 'fethc_type', '提取验证', null, '2016-09-05 15:14:01', null, '2016-09-05 15:14:01', '20', null, '\0');
+INSERT INTO `sys_dictionary` VALUES ('21', 'Receipt', '小票提取', 'String', 'Receipt', '小票提取', null, '2016-09-05 15:15:23', null, '2016-09-05 15:15:23', null, 'fethc_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('22', 'PWD', '密码提取', 'String', 'PWD', '密码提取', null, '2016-09-05 15:15:37', null, '2016-09-05 15:15:37', null, 'fethc_type', '\0');
+INSERT INTO `sys_dictionary` VALUES ('23', 'ID_Card', '证件提取', 'String', 'ID_Card', '证件提取', null, '2016-09-05 15:16:20', null, '2016-09-05 15:16:20', null, 'fethc_type', '\0');
 
 -- ----------------------------
 -- Table structure for sys_order
@@ -322,14 +325,12 @@ CREATE TABLE `sys_order` (
   `retreat_price` decimal(9,2) DEFAULT NULL COMMENT '找补金额',
   `pay_type` int(11) DEFAULT NULL COMMENT '支付方式,关联sys_dictionary表',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
 
 -- ----------------------------
 -- Records of sys_order
 -- ----------------------------
-INSERT INTO `sys_order` VALUES ('1', '1472809260875', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '30.00', '30.00', '0.00', null);
-INSERT INTO `sys_order` VALUES ('3', '1472809562281', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '30.00', '30.00', '0.00', null);
-INSERT INTO `sys_order` VALUES ('5', '1472809607802', '0', '2016-09-02 09:44:14', '0', '2016-09-02 09:44:14', 'DZF', '1', '40.00', '50.00', '10.00', null);
+INSERT INTO `sys_order` VALUES ('1', '1473056743878', '0', '2016-09-05 14:25:44', '0', '2016-09-05 14:25:44', 'DZF', '1', '30.00', '500.00', '470.00', null);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -369,4 +370,37 @@ CREATE TABLE `sys_user_extra` (
 -- ----------------------------
 -- Records of sys_user_extra
 -- ----------------------------
+
+-- ----------------------------
+-- View structure for view_box_size
+-- ----------------------------
+DROP VIEW IF EXISTS `view_box_size`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `view_box_size` AS SELECT DISTINCT
+	DISTINCT locker_charge_standard.id,
+	locker_box.cabinet_id cabinet_id,
+	locker_box.box_size_id box_size_id,
+	sys_dictionary.`code`,
+	sys_dictionary.`name`,
+	locker_charge_standard.price,
+	sys_dictionary.description
+FROM
+	locker_box_charge_standard
+INNER JOIN locker_box ON locker_box.id = locker_box_charge_standard.box_id
+INNER JOIN locker_cabinet ON locker_box.cabinet_id = locker_cabinet.id
+INNER JOIN locker_charge_standard ON locker_charge_standard.id = locker_box_charge_standard.charge_standard_id
+INNER JOIN sys_dictionary ON locker_box.box_size_id = sys_dictionary.id
+UNION
+SELECT
+	DISTINCT locker_charge_standard.id,
+	locker_box.cabinet_id cabinet_id,
+	locker_box.box_size_id box_size_id,
+	sys_dictionary.`code`,
+	sys_dictionary.`name`,
+	locker_charge_standard.price,
+	sys_dictionary.description
+from locker_box
+INNER JOIN locker_cabinet ON locker_box.cabinet_id = locker_cabinet.id
+INNER JOIN sys_dictionary ON locker_box.box_size_id = sys_dictionary.id
+INNER JOIN locker_charge_standard ON  locker_charge_standard.default_box_size = locker_box.box_size_id
+WHERE locker_box.id NOT in (select box_id from locker_box_charge_standard) ;
 SET FOREIGN_KEY_CHECKS=1;
