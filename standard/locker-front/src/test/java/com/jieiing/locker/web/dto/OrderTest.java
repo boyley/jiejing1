@@ -6,7 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jiejing.locker.domains.LeaseBox;
 import com.jiejing.locker.domains.LeaseInfo;
 import com.jiejing.locker.domains.Order;
+import com.jiejing.locker.service.ILeaseBoxService;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -16,6 +18,7 @@ import java.util.Arrays;
  * Created by Bogle on 2016/9/1.
  */
 public class OrderTest {
+
 
     @Test
     public void orderDtoJson() {

@@ -1,5 +1,6 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
 import lombok.*;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "sys_order")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"payPrice","retreatrice","createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class Order extends AbstractAuditingEntity<Integer> {
 
 
@@ -30,6 +32,7 @@ public class Order extends AbstractAuditingEntity<Integer> {
     private Const.OrderState orderState;//订单状态DZF:待支付，YZF：已支付，YQX：已取消，YWC：已完成,YGB:已关闭
 
     @Column(name = "order_source", nullable = false)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer orderSource;//下单渠道
 
     @Column(name = "price", nullable = false,precision=9, scale=2)
@@ -45,6 +48,11 @@ public class Order extends AbstractAuditingEntity<Integer> {
     @Column(name = "pay_type", nullable = true)
     private Integer payType;//支付方式,关联sys_dictionary表
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
-    private LeaseBox leaseBox = new LeaseBox();
+    private String payCode;//支付方式
+
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private LeaseBox leaseBox;
 }

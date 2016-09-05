@@ -75,6 +75,14 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
     @Column(name = "check_type", nullable = false)
     private Integer checkType;//校验模式（引用sys_dictionary）
 
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String checkCode;//取件方式
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private String infoContent; //内容
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "timeout", nullable = true)
     private Integer timeout;//是否超时寄存,大于0表示超时，具体数值表示超时值
@@ -88,5 +96,6 @@ public class LeaseBox extends AbstractAuditingEntity<Integer> {
     private Integer retreatd;//补单id
 
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<LeaseInfo> leaseInfos;//存储资料
 }

@@ -1,5 +1,6 @@
 package com.jiejing.locker.service.impl;
 
+import com.jiejing.locker.defines.Const;
 import com.jiejing.locker.domains.Box;
 import com.jiejing.locker.repository.BoxRepository;
 import com.jiejing.locker.service.IBoxService;
@@ -28,5 +29,10 @@ public class BoxServiceImpl implements IBoxService {
         Iterator<Box> iter = entities.iterator();
 
         return boxRepository.save(entities);
+    }
+
+    @Override
+    public Optional<Box> findOneEnableBox(Integer boxSizeId) {
+        return boxRepository.findOneByBoxSizeIdAndDepositStateAndGateLockStateNotAndStatus(boxSizeId, Const.DepositState.N, Const.GateLockState.ERROR, Const.Status.ENABLE);
     }
 }

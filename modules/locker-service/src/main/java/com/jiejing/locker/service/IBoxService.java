@@ -1,5 +1,6 @@
 package com.jiejing.locker.service;
 
+import com.jiejing.locker.defines.Const;
 import com.jiejing.locker.domains.Box;
 
 import java.util.Optional;
@@ -12,4 +13,6 @@ public interface IBoxService {
     Optional<Box> findOne(Integer id);
 
     Iterable<Box> save(Iterable<Box> entities);
+
+    Optional<Box> findOneEnableBox(Integer boxSizeId);
 }

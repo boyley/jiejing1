@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface DictionaryRepository extends JpaRepository<Dictionary, Integer> {
 
     Optional<Dictionary> findOneById(Integer id);
+
+    Optional<Dictionary> findOneByCode(String code);
 }

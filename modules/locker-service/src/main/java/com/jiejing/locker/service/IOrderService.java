@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface IOrderService {
 
     Optional<Order> save(Order order);
+
+    Optional<Order> findOne(Integer id);
 }

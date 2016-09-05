@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
@@ -33,5 +30,23 @@ public class OrderResource {
                     .body(order);
 
         }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(value = "/pay",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> pay(@RequestBody Order order) {
+        return ResponseEntity.created(UriComponentsBuilder.fromPath("http://jiejing/pay/url").build().toUri())
+                .headers(HeaderUtil.createAlert("order.created", "http://jiejing/pay/url"))
+                .body("{\"url\":\"http://jiejing/pay/url\"}");
+    }
+
+    @RequestMapping(value = "/{id:\\d+}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> pay(@PathVariable("id") Integer id) {
+        return orderService.findOne(id)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

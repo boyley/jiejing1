@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface IDictionaryService {
 
     Optional<Dictionary> findOne(Integer id);
+
+    Optional<Dictionary> findOneByCode(String code);
 }

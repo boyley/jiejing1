@@ -21,4 +21,9 @@ public class DictionaryServiceImpl implements IDictionaryService {
     public Optional<Dictionary> findOne(Integer id) {
         return dictionaryRepository.findOneById(id);
     }
+
+    @Override
+    public Optional<Dictionary> findOneByCode(String code) {
+        return dictionaryRepository.findOneByCode(code);
+    }
 }

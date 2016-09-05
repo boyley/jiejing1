@@ -46,7 +46,7 @@ public interface Const {
     }
 
     enum DepositState {
-        Y("有存物"), N("无存物"), ERROR("异常");
+        Y("有存物"), N("无存物"), ERROR("异常"),ZY("占用");;
         private String value;
 
         DepositState(String value) {
@@ -55,7 +55,7 @@ public interface Const {
     }
 
     enum BoxState {
-        DQ("待取"), YQ("已取");
+        DQ("待取"), YQ("已取"),ZY("占用");
         private String value;
 
         BoxState(String value) {
