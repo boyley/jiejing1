@@ -1,10 +1,13 @@
 package com.jiejing.locker.repository;
 
 import com.jiejing.locker.domains.LeaseInfo;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Created by Bogle on 2016/9/2.
  */
-public interface LeaseInfoRespository extends JpaRepository<LeaseInfo, Integer> {
+@Mapper
+public interface LeaseInfoRespository  {
+
+    int save(LeaseInfo leaseInfo);
 }

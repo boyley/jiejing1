@@ -1,64 +1,42 @@
 package com.jiejing.locker.domains;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.domain.Persistable;
 
-import javax.persistence.*;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
-/**
- * Created by Bogle on 2016/8/29.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "sys_user")
-public class User implements Persistable<Integer> {
-
-    public enum Sex {
-        F("女"), M("男"), N("未知");
-        private String value;
-
-        Sex(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class User {
+    /**
+    * 主键
+    */
     private Integer id;
 
-    @OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
-    private Account account;
+    /**
+    * 账号id
+    */
+    private Integer accountId;
 
-    @Column(name = "name", nullable = true,length = 32)
+    /**
+    * 姓名
+    */
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sex", nullable = true)
-    private Sex sex;
+    /**
+    * male 雄性,female 雌性,null:未知
+    */
+    private String sex;
 
-    @CreatedDate
-    @Column(name = "created_date", nullable = false)
-    private ZonedDateTime createdDate = ZonedDateTime.now();
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
 
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
 
-    @Override
-    public boolean isNew() {
-        return this.getId() == null;
-    }
+
 }

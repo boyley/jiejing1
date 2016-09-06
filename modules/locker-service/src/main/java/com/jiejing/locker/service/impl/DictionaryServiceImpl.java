@@ -19,11 +19,11 @@ public class DictionaryServiceImpl implements IDictionaryService {
 
     @Override
     public Optional<Dictionary> findOne(Integer id) {
-        return dictionaryRepository.findOneById(id);
+        return Optional.ofNullable(dictionaryRepository.findOneById(id));
     }
 
     @Override
     public Optional<Dictionary> findOneByCode(String code) {
-        return dictionaryRepository.findOneByCode(code);
+        return Optional.ofNullable(dictionaryRepository.findOneByCode(code));
     }
 }

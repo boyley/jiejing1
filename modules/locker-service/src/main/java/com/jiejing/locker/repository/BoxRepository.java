@@ -2,19 +2,23 @@ package com.jiejing.locker.repository;
 
 import com.jiejing.locker.defines.Const;
 import com.jiejing.locker.domains.Box;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Optional;
 
 /**
  * Created by Bogle on 2016/8/30.
  */
-public interface BoxRepository extends JpaRepository<Box, Integer> {
+@Mapper
+public interface BoxRepository {
     Optional<Box> findOneById(Integer id);
 
-    Optional<Box> findOneByBoxSizeIdAndDepositStateAndGateLockStateNotAndStatus(Integer boxSizeId, Const.DepositState depositState, Const.GateLockState gateLockState,Const.Status status);
 
-//    @Query(value = "SELECT * FROM locker_box_size RIGHT JOIN (SELECT locker_box.box_size_id box_size_id FROM locker_box LEFT JOIN locker_cabinet ON  (locker_cabinet.id = locker_box.cabinet_id)  WHERE locker_cabinet.id = :cabinet_id ) AS tab ON (tab.box_size_id = locker_box_size.id)" ,nativeQuery = true)
+    @Select(value = "select id,name,code,cabinet_id as cabinetId,box_size_id boxSizeId, gate_lock_state gateLockState,deposit_state depositState,`status` from locker_box where box_size_id = #{boxSizeId,jdbcType=INTEGER} AND deposit_state='N' AND gate_lock_state<>'ERROR' AND `status`='ENABLE' limit 1")
+    Box findOneEnableBox(@Param("boxSizeId") Integer boxSizeId);
 
 
+    int update(Box box);
 }

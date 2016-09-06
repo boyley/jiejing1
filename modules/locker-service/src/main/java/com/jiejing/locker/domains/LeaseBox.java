@@ -1,101 +1,138 @@
 package com.jiejing.locker.domains;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
-import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Data;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
-/**
- * 租箱记录
- * Created by Bogle on 2016/8/30.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_lease_box")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate","price","orderId","boxState"})
-public class LeaseBox extends AbstractAuditingEntity<Integer> {
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class LeaseBox {
+    /**
+     * 主键
+     */
+    private Integer id;
 
-    @Column(name = "cabinet_id", nullable = false)
+    /**
+     * 创建人
+     */
+    private Integer createdBy;
+
+    /**
+     * 创建时间
+     */
+    private ZonedDateTime createdDate;
+
+    /**
+     * 最后的更新人
+     */
+    private Integer lastModifiedBy;
+
+    /**
+     * 最后一次更新时间
+     */
+    private ZonedDateTime lastModifiedDate;
+
+    /**
+     * 存储柜id
+     */
     private Integer cabinetId;
 
-    @Column(name = "box_id", nullable = false)
+    /**
+     * 存储箱id
+     */
     private Integer boxId;
 
-    @Column(name = "box_size_id", nullable = false)
+    /**
+     * 存储箱规格id
+     */
     private Integer boxSizeId;
 
-    @Column(name = "charge_standard_id", nullable = false)
+    /**
+     * 计费标准id
+     */
     private Integer chargeStandardId;
 
-    @Column(name = "cabinet_name", nullable = false, length = 32)
+    /**
+     * 存储柜名称
+     */
     private String cabinetName;
 
-    @Column(name = "cabinet_code", nullable = false, length = 32)
+    /**
+     * 存储柜编码
+     */
     private String cabinetCode;
 
-    @Column(name = "box_name", nullable = false, length = 32)
+    /**
+     * 存储箱名称
+     */
     private String boxName;
 
-    @Column(name = "box_code", nullable = false, length = 32)
+    /**
+     * 存储箱名称
+     */
     private String boxCode;
 
-    @Column(name = "box_size_name", nullable = false, length = 32)
+    /**
+     * 存储箱规格名称
+     */
     private String boxSizeName;
 
-    @Column(name = "box_size_code", nullable = false, length = 32)
+    /**
+     * 存储箱规格编码
+     */
     private String boxSizeCode;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "charge_type", nullable = false)
-    private Const.ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+    /**
+     * 收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+     */
+    private Const.ChargeType chargeType;
 
-    @Column(name = "cycle_time", nullable = false)
-    private Integer cycleTime;//收费周期（小时）
+    /**
+     * 收费周期（小时）
+     */
+    private Integer cycleTime;
 
-    @Column(name = "price", nullable = false, precision = 9, scale = 2)
-    private BigDecimal price;//价格
+    /**
+     * 价格
+     */
+    private BigDecimal price;
 
-    @Column(name = "order_id", nullable = false)
-    private Integer orderId;//订单id
+    /**
+     * 订单id
+     */
+    private Integer orderId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "box_state", nullable = false)
-    private Const.BoxState boxState;//箱状态DQ:待取，YQ：已取
+    /**
+     * 箱状态DQ:待取，YQ：已取,ZY:占用
+     */
+    private Const.BoxState boxState;
 
-    @Column(name = "check_type", nullable = false)
-    private Integer checkType;//校验模式（引用sys_dictionary）
+    /**
+     * 校验模式（引用sys_dictionary）
+     */
+    private Integer checkType;
 
-    @Transient
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String checkCode;//取件方式
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private String infoContent; //内容
+    /**
+     * 是否超时寄存,大于0表示超时，具体数值表示超时值
+     */
+    private Integer timeout;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "timeout", nullable = true)
-    private Integer timeout;//是否超时寄存,大于0表示超时，具体数值表示超时值
+    /**
+     * 取箱时间
+     */
+    private Date fetchTime;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "fetch_time", nullable = true)
-    private ZonedDateTime fetchime;//取箱时间
+    /**
+     * 补单id
+     */
+    private Integer retreatId;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "retreat_id", nullable = true)
-    private Integer retreatd;//补单id
-
-    @Transient
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<LeaseInfo> leaseInfos;//存储资料
 }

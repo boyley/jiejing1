@@ -31,18 +31,16 @@ public class OrderTest {
         leaseBoxDto.setBoxId(1);
         leaseBoxDto.setCheckType(1);
 
-        orderDto.setLeaseBox(leaseBoxDto);
+//        orderDto.setLeaseBox(leaseBoxDto);
 
 
         LeaseInfo leaseInfoDto1 = new LeaseInfo();
         leaseInfoDto1.setInfoType(1);
-        leaseInfoDto1.setInfoContent("188888888888881");
 
         LeaseInfo leaseInfoDto2 = new LeaseInfo();
         leaseInfoDto2.setInfoType(2);
-        leaseInfoDto2.setInfoContent("188888888888882");
 
-        leaseBoxDto.setLeaseInfos(Arrays.asList(leaseInfoDto1, leaseInfoDto2));
+//        leaseBoxDto.setLeaseInfos(Arrays.asList(leaseInfoDto1, leaseInfoDto2));
         this.printlnJson(orderDto);
     }
 

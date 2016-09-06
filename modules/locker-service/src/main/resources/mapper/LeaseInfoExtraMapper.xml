@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.LeaseInfoExtraRepository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.LeaseInfoExtra">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="lease_info_id" property="leaseInfoId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, lease_info_id, name, value
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from locker_lease_info_extra
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from locker_lease_info_extra
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="saveList" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_lease_info_extra (id, lease_info_id, name,
+        value)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=INTEGER}, #{item.leaseInfoId,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},
+            #{item.value,jdbcType=VARCHAR})
+        </foreach>
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.jiejing.locker.domains.LeaseInfoExtra" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into locker_lease_info_extra
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="leaseInfoId != null">
+                lease_info_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="value != null">
+                value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="leaseInfoId != null">
+                #{leaseInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                #{value,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jiejing.locker.domains.LeaseInfoExtra">
+        update locker_lease_info_extra
+        <set>
+            <if test="leaseInfoId != null">
+                lease_info_id = #{leaseInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                value = #{value,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

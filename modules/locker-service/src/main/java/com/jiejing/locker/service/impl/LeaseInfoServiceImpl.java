@@ -16,7 +16,7 @@ public class LeaseInfoServiceImpl implements ILeaseInfoService {
     private LeaseInfoRespository leaseInfoRespository;
 
     @Override
-    public LeaseInfo save(LeaseInfo leaseInfo) {
+    public int save(LeaseInfo leaseInfo) {
         return leaseInfoRespository.save(leaseInfo);
     }
 }

@@ -7,5 +7,5 @@ import com.jiejing.locker.domains.LeaseInfo;
  */
 public interface ILeaseInfoService {
 
-    LeaseInfo save(LeaseInfo leaseInfo);
+    int save(LeaseInfo leaseInfo);
 }

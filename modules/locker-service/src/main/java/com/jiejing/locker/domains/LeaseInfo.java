@@ -1,54 +1,40 @@
 package com.jiejing.locker.domains;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Data;
 
-import javax.persistence.*;
+import java.util.List;
 
-/**
- * 订单
- * Created by Bogle on 2016/8/30.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_lease_info")
-@JsonIgnoreProperties(value = {"id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
-@EntityListeners(AuditingEntityListener.class)
-public class LeaseInfo implements Persistable<Integer> {
-
-    @Id
-    @GeneratedValue
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class LeaseInfo {
+    /**
+     * 主键
+     */
     private Integer id;
 
-    @Column(name = "info_type", nullable = false)
-    private Integer infoType;//资料类型（引用sys_dictionary）,存取动作
+    /**
+     * 资料类型（引用sys_dictionary）
+     */
+    private Integer infoType;
 
-    @Column(name = "code", nullable = false, length = 32)
+    /**
+     * 证件类型code
+     */
     private String code;
 
-    @Column(name = "name", nullable = false, length = 30)
-    private String name;//资料名称
+    /**
+     * 资料名称
+     */
+    private String name;
 
-    @Column(name = "info_content", nullable = false, length = 1000)
-    private String infoContent;//资料内容
+    /**
+     * 资料文件
+     */
+    private String infoFile;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "info_file", nullable = false, length = 1000)
-    private String infoile;//资料文件
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public boolean isNew() {
-        return this.getId() == null;
-    }
+    /**
+     * 资料信息
+     */
+    private List<LeaseInfoExtra> leaseInfoExtras;
 }

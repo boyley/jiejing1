@@ -1,10 +1,12 @@
 package com.jiejing.locker.repository;
 
 import com.jiejing.locker.domains.Region;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Created by Bogle on 2016/8/29.
  */
-public interface RegionRepository extends JpaRepository<Region, Integer> {
+@Mapper
+public interface RegionRepository  {
+    boolean exists(Integer id);
 }

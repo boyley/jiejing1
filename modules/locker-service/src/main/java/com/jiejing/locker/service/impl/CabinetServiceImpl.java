@@ -42,31 +42,33 @@ public class CabinetServiceImpl implements ICabinetService {
     @Override
     public Cabinet save(Cabinet cabinet) {
         // 查询柜子地理位置是否正确
-        Integer regionId = cabinet.getRegionId();
-        if (regionService.exists(regionId)) {
-            throw new RuntimeException("地理位置id：" + regionId + "不存在");
-        }
-        cabinet = this.cabinetRepository.save(cabinet);
-        // 箱子关联柜子id
-        if (cabinet.getBoxs() != null) {
-            for (Box box : cabinet.getBoxs()) {
-                box.setCabinetId(cabinet.getId());
-            }
-        }
-        this.boxService.save(cabinet.getBoxs());
-        return cabinet;
+//        Integer regionId = cabinet.getRegionId();
+//        if (regionService.exists(regionId)) {
+//            throw new RuntimeException("地理位置id：" + regionId + "不存在");
+//        }
+//        cabinet = this.cabinetRepository.save(cabinet);
+//        // 箱子关联柜子id
+//        if (cabinet.getBoxs() != null) {
+//            for (Box box : cabinet.getBoxs()) {
+//                box.setCabinetId(cabinet.getId());
+//            }
+//        }
+//        this.boxService.save(cabinet.getBoxs());
+//        return cabinet;
+        return null;
     }
 
     @Override
     public Optional<Cabinet> findOne(Integer id) {
-        return this.cabinetRepository.findOneById(id);
+        return Optional.ofNullable(this.cabinetRepository.findOneById(id));
     }
 
     @Override
     public Optional<List<BoxSize>> findBoxSize(int id) {
         List<BoxSize> boxSizes = cabinetRepository.findBoxSize(id).stream()
                 .map(e -> {
-                    e.setEnable(boxService.findOneEnableBox(e.getBoxSizeId()) != null);
+                    Box box = boxService.findOneEnableBox(e.getBoxSizeId());
+                    e.setEnable(box != null);
                     return e;
                 })
                 .collect(Collectors.toList());

@@ -22,13 +22,13 @@ public class LeaseBoxServiceImpl implements ILeaseBoxService {
 
 
     @Override
-    public LeaseBox save(LeaseBox leaseBox) {
+    public int save(LeaseBox leaseBox) {
         return leaseBoxRepository.save(leaseBox);
     }
 
     @Override
     public Stream<LeaseBox> quXiang(LeaseBox leaseBox) {
-        return leaseBoxRepository.findAll(leaseBox.getCabinetId(), leaseBox.getCheckCode()).map(e -> {
+        return leaseBoxRepository.findAll(leaseBox.getCabinetId(), leaseBox.getCheckCode()).stream().map(e -> {
             Const.ChargeType chargeType = e.getChargeType();//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
             Integer cycleTime = e.getCycleTime(); //收费周期（小时）
             LocalDateTime lastModifiedDate = e.getLastModifiedDate().toLocalDateTime();//订单完成时间

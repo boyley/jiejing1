@@ -48,6 +48,14 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private IActionLogService actionLogService;
 
+    @Autowired
+    private ILeaseInfoExtraService leaseInfoExtraService;
+
+    @Override
+    public Optional<Order> findOne(Integer id) {
+        return Optional.ofNullable(orderRepository.findOneById(id));
+    }
+
     /**
      * 下单
      *
@@ -62,7 +70,7 @@ public class OrderServiceImpl implements IOrderService {
         List<LeaseInfo> leaseInfos = leaseBox.getLeaseInfos();
         if (CollectionUtils.isEmpty(leaseInfos)) throw new RuntimeException("没提供资料信息");
         //箱子资料信息
-        Optional<Box> optional = boxService.findOneEnableBox(leaseBox.getBoxSizeId());
+        Optional<Box> optional = Optional.ofNullable(boxService.findOneEnableBox(leaseBox.getBoxSizeId()));
         if (optional.isPresent()) {
             return optional.map(e -> {
                 // 计费标准
@@ -76,21 +84,23 @@ public class OrderServiceImpl implements IOrderService {
             }).map(e -> {
                 // 订单处理
                 order.setOrderState(Const.OrderState.DZF);// 订单状态：DZF:待支付
-                if (order.getPayPrice().compareTo(order.getPrice()) < 0) throw new RuntimeException("支付金额不足");
-                order.setRetreatrice(order.getPayPrice().subtract(order.getPrice()));//计算找补金额
                 orderRepository.save(order);
                 order.setOrderNum(this.orderNum(order.getId())); //生成订单号
+                orderRepository.update(order);
                 leaseBox.setOrderId(order.getId());
                 return e;
             }).map(e -> {
                 // 箱子处理
                 if (e.getStatus() == Const.Status.DISENABLE) throw new RuntimeException("禁用箱子");
                 if (e.getStatus() == Const.Status.ERROR) throw new RuntimeException("异常箱子");
-                if (e.getDepositState() == Const.DepositState.Y || e.getDepositState() == Const.DepositState.ZY) throw new RuntimeException("使用中");
+                if (e.getDepositState() == Const.DepositState.Y || e.getDepositState() == Const.DepositState.ZY)
+                    throw new RuntimeException("使用中");
                 if (e.getDepositState() == Const.DepositState.ERROR) throw new RuntimeException("异常箱子");
+                e.setDepositState(Const.DepositState.ZY); // 箱子状态为占用状态
+                this.boxService.update(e);
                 leaseBox.setBoxCode(e.getCode());//箱子编码
                 leaseBox.setBoxName(e.getName());// 箱子code
-                leaseBox.setBoxId(e.getId());//x
+                leaseBox.setBoxId(e.getId());//
                 return e;
             }).map(e -> {
                 // 柜子处理
@@ -122,9 +132,18 @@ public class OrderServiceImpl implements IOrderService {
                     leaseInfo.setCode(param.getCode());
                     leaseInfo.setInfoType(param.getId());
                     leaseInfoService.save(leaseInfo);
+                    leaseInfo.getLeaseInfoExtras().stream().forEach(leaseInfoExtra -> {
+                       leaseInfoExtra.setLeaseInfoId(leaseInfo.getId());
+                    });
+
+                    this.leaseInfoExtraService.saveList(leaseInfo.getLeaseInfoExtras());
+
                     return new ActionLog(null, Const.OptType.CX, leaseBox.getId(), leaseInfo.getId());
                 }).collect(Collectors.toList());
+
                 actionLogService.save(actionLogs);
+
+
                 e.setDepositState(Const.DepositState.Y);
                 return order;
             });
@@ -132,10 +151,6 @@ public class OrderServiceImpl implements IOrderService {
         throw new RuntimeException("无可用的箱子");
     }
 
-    @Override
-    public Optional<Order> findOne(Integer id) {
-        return this.orderRepository.findOneById(id);
-    }
 
     private String orderNum(Integer id) {
         return String.valueOf(System.currentTimeMillis());

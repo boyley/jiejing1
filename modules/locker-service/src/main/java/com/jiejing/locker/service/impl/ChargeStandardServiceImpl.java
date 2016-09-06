@@ -23,11 +23,11 @@ public class ChargeStandardServiceImpl implements IChargeStandardService {
      */
     @Override
     public Optional<ChargeStandard> findOneByBoxId(Integer id) {
-        return chargeStandardRepository.findOneByBoxId(id);
+        return Optional.ofNullable(chargeStandardRepository.findOneByBoxId(id));
     }
 
     @Override
     public Optional<ChargeStandard> findOneByDefaultBoxSize(Integer id) {
-        return chargeStandardRepository.findOneByDefaultBoxSize(id);
+        return Optional.ofNullable(chargeStandardRepository.findOneByDefaultBoxSize(id));
     }
 }

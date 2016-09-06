@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.DictionaryRepository" >
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.Dictionary" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="value_type" property="valueType" jdbcType="VARCHAR" />
+        <result column="value" property="value" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="created_by" property="createdBy" jdbcType="INTEGER" />
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="last_modified_by" property="lastModifiedBy" jdbcType="INTEGER" />
+        <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+        <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+        <result column="editable" property="editable" jdbcType="BIT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, code, name, value_type, value, description, created_by, created_date, last_modified_by,
+        last_modified_date, parent_id, parent_code, editable
+    </sql>
+
+    <select id="findOneById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_dictionary
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="findOneByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_dictionary
+        where code = #{code,jdbcType=INTEGER}
+        Limit 1
+    </select>
+
+</mapper>

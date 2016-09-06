@@ -28,11 +28,17 @@ public class BoxServiceImpl implements IBoxService {
     public Iterable<Box> save(Iterable<Box> entities) {
         Iterator<Box> iter = entities.iterator();
 
-        return boxRepository.save(entities);
+//        return boxRepository.save(entities);
+        return null;
     }
 
     @Override
-    public Optional<Box> findOneEnableBox(Integer boxSizeId) {
-        return boxRepository.findOneByBoxSizeIdAndDepositStateAndGateLockStateNotAndStatus(boxSizeId, Const.DepositState.N, Const.GateLockState.ERROR, Const.Status.ENABLE);
+    public Box findOneEnableBox(Integer boxSizeId) {
+        return boxRepository.findOneEnableBox(boxSizeId);
+    }
+
+    @Override
+    public int update(Box box) {
+        return boxRepository.update(box);
     }
 }

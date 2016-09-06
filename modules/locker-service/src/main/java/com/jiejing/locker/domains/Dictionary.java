@@ -1,41 +1,76 @@
 package com.jiejing.locker.domains;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import java.util.Date;
 
-/**
- * 字典
- * Created by Bogle on 2016/8/29.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "sys_dictionary")
-@EntityListeners(AuditingEntityListener.class)
-public class Dictionary extends AbstractAuditingEntity<Integer> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Dictionary {
+    /**
+    * 主键
+    */
+    private Integer id;
 
-    @Column(name = "code", nullable = false,length = 32)
+    /**
+    * 字典编码
+    */
     private String code;
-    @Column(name = "name", nullable = false,length = 32)
+
+    /**
+    * 字典名称
+    */
     private String name;
-    @Column(name = "value_type", nullable = false,length = 32)
-    private String valueType;//字典值类型
-    @Column(name = "value", nullable = false)
-    private String value;//字典值
-    @Column(name = "description", nullable = false,length = 1000)
+
+    /**
+    * 字典值类型
+    */
+    private String valueType;
+
+    /**
+    * 字典值
+    */
+    private String value;
+
+    /**
+    * 描述
+    */
     private String description;
 
-    @Column(name = "parent_id", nullable = true)
-    private Integer parentId;//父节点id
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
 
-    @Column(name = "parent_code", nullable = false,length = 32)
-    private String parentCode;//parent_code
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
+
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
+
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+    /**
+    * 父节点id
+    */
+    private Integer parentId;
+
+    /**
+    * 父节点code
+    */
+    private String parentCode;
+
+    /**
+    * 是否可编辑
+    */
+    private Boolean editable;
+
 }

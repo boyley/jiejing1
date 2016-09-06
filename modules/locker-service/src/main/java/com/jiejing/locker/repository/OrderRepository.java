@@ -1,14 +1,19 @@
 package com.jiejing.locker.repository;
 
 import com.jiejing.locker.domains.Order;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
 
 /**
  * Created by Bogle on 2016/8/31.
  */
-public interface OrderRepository extends JpaRepository<Order, Integer> {
-    Optional<Order> findOneById(Integer id);
+@Mapper
+public interface OrderRepository {
+
+    Order findOneById(Integer id);
+
+    int save(Order order);
+
+    void update(Order order);
 }

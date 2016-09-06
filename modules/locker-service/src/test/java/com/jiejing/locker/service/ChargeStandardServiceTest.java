@@ -23,8 +23,9 @@ public class ChargeStandardServiceTest extends AbsServiceTest {
 
     @Test
     public void saveTest1() {
-        BoxChargeStandard boxChargeStandard = new BoxChargeStandard(1,1);
-        boxChargeStandardRepository.save(boxChargeStandard);
+//        BoxChargeStandard boxChargeStandard = new BoxChargeStandard(1,1);
+//        boxChargeStandardRepository.save(boxChargeStandard);
+
     }
 
     @Test

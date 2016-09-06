@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.ActionLogRepository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.ActionLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="opt_type" property="optType" jdbcType="CHAR"/>
+        <result column="lease_id" property="leaseId" jdbcType="INTEGER"/>
+        <result column="lease_info_id" property="leaseInfoId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, opt_type, lease_id, lease_info_id
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from locker_action_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from locker_action_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="save" parameterType="com.jiejing.locker.domains.ActionLog">
+        insert into locker_action_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="optType != null">
+                opt_type,
+            </if>
+            <if test="leaseId != null">
+                lease_id,
+            </if>
+            <if test="leaseInfoId != null">
+                lease_info_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="optType != null">
+                #{optType,jdbcType=CHAR},
+            </if>
+            <if test="leaseId != null">
+                #{leaseId,jdbcType=INTEGER},
+            </if>
+            <if test="leaseInfoId != null">
+                #{leaseInfoId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="saveList" parameterType="list" >
+        insert into locker_action_log (id, opt_type, lease_id,
+        lease_info_id)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.id,jdbcType=INTEGER}, #{item.optType,jdbcType=CHAR}, #{item.leaseId,jdbcType=INTEGER},
+            #{item.leaseInfoId,jdbcType=INTEGER})
+        </foreach>
+
+    </insert>
+</mapper>

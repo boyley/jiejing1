@@ -1,58 +1,93 @@
 package com.jiejing.locker.domains;
 
-import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
-import java.util.Set;
+import java.util.Date;
 
-/**
- * 柜子信息表
- * Created by Bogle on 2016/8/29.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_cabinet")
-@EntityListeners(AuditingEntityListener.class)
-public class Cabinet extends AbstractAuditingEntity<Integer> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Cabinet {
+    /**
+    * 主键
+    */
+    private Integer id;
 
-    @Column(name = "code", nullable = false,length = 32)
+    /**
+    * 柜子编码
+    */
     private String code;
-    @Column(name = "name", nullable = false,length = 32)
+
+    /**
+    * 柜子名称
+    */
     private String name;
-    @Column(name = "region_id", nullable = false)
-    private Integer regionId;//地址：道路/小区 编码
-    @Column(name = "lon", nullable = true,precision=10, scale=5)
-    private BigDecimal lon;//地理经度
-    @Column(name = "lat", nullable = true,precision=10, scale=2)
-    private BigDecimal lat;//地理纬度
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Const.Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
-    @Column(name = "multiple", nullable = false)
-    private Boolean multiple = false;//可多次使用
-    @Column(name = "voucher_verify", nullable = false)
-    private Boolean voucherVerify = false;//是否证件验证
-    @Column(name = "description", nullable = true,length = 1000)
+
+    /**
+    * 地址：道路/小区 编码
+    */
+    private Integer regionId;
+
+    /**
+    * 地理经度
+    */
+    private BigDecimal lon;
+
+    /**
+    * 地理纬度
+    */
+    private BigDecimal lat;
+
+    /**
+    * 是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
+    */
+    private String status;
+
+    /**
+    * 可多次使用
+    */
+    private Boolean multiple;
+
+    /**
+    * 是否证件验证
+    */
+    private Boolean voucherVerify;
+
+    /**
+    * 描述
+    */
     private String description;
 
-    @Column(name = "open_time", nullable = false)
-    private ZonedDateTime openTime = ZonedDateTime.now();//开机时间
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
 
-    @Column(name = "close_time", nullable = false)
-    private ZonedDateTime closeTime = ZonedDateTime.now();//关机时间
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
 
-//        @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
-    @Transient
-    private Set<Box> boxs;
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
+
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+    /**
+    * 开机时间
+    */
+    private Date openTime;
+
+    /**
+    * 关机时间
+    */
+    private Date closeTime;
+
+
 }

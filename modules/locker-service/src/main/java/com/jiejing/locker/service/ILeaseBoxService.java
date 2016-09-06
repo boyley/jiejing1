@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  */
 public interface ILeaseBoxService {
 
-    LeaseBox save(LeaseBox leaseBox);
+    int save(LeaseBox leaseBox);
 
     /**
      * 使用验证的资料信息获取箱子

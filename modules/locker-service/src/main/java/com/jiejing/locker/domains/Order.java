@@ -1,58 +1,71 @@
 package com.jiejing.locker.domains;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
-import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Data;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
-/**
- * 订单
- * Created by Bogle on 2016/8/30.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "sys_order")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"payPrice","retreatrice","createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
-public class Order extends AbstractAuditingEntity<Integer> {
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Order {
+    /**
+     * 主键
+     */
+    private Integer id;
 
+    /**
+     * 订单号
+     */
+    private String orderNum;
 
-    @Column(name = "order_num", nullable = false,length = 32)
-    private String orderNum;//订单id
+    /**
+     * 创建人
+     */
+    private Integer createdBy;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "order_state", nullable = true)
-    private Const.OrderState orderState;//订单状态DZF:待支付，YZF：已支付，YQX：已取消，YWC：已完成,YGB:已关闭
+    /**
+     * 创建时间
+     */
+    private ZonedDateTime createdDate;
 
-    @Column(name = "order_source", nullable = false)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer orderSource;//下单渠道
+    /**
+     * 最后的更新人
+     */
+    private Integer lastModifiedBy;
 
-    @Column(name = "price", nullable = false,precision=9, scale=2)
-    private BigDecimal price;//费用
+    /**
+     * 最后一次更新时间
+     */
+    private ZonedDateTime lastModifiedDate;
 
-    @Column(name = "pay_price", nullable = false,precision=9, scale=2)
-    private BigDecimal payPrice;//支付费用
+    /**
+     * 订单状态DZF:待支付，YZF：已支付，YQX：已取消，YWC：已完成,YGB:已关闭
+     */
+    private Const.OrderState orderState;
 
-    @Column(name = "retreat_price", nullable = true, precision = 9, scale = 2)
-    private BigDecimal retreatrice;//找补费用
+    /**
+     * 下单渠道
+     */
+    private Integer orderSource;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "pay_type", nullable = true)
-    private Integer payType;//支付方式,关联sys_dictionary表
+    /**
+     * 费用
+     */
+    private BigDecimal price;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private String payCode;//支付方式
+    /**
+     * 支付金额
+     */
+    private BigDecimal payPrice;
 
-    @Transient
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * 支付方式,关联sys_dictionary表
+     */
+    private Integer payType;
+
     private LeaseBox leaseBox;
+
+
 }

@@ -14,5 +14,7 @@ public interface IBoxService {
 
     Iterable<Box> save(Iterable<Box> entities);
 
-    Optional<Box> findOneEnableBox(Integer boxSizeId);
+    Box findOneEnableBox(Integer boxSizeId);
+
+    int update(Box box);
 }

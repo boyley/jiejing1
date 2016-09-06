@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.LeaseBoxRepository" >
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.LeaseBox" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="created_by" property="createdBy" jdbcType="INTEGER" />
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+        <result column="last_modified_by" property="lastModifiedBy" jdbcType="INTEGER" />
+        <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP" />
+        <result column="cabinet_id" property="cabinetId" jdbcType="INTEGER" />
+        <result column="box_id" property="boxId" jdbcType="INTEGER" />
+        <result column="box_size_id" property="boxSizeId" jdbcType="INTEGER" />
+        <result column="charge_standard_id" property="chargeStandardId" jdbcType="INTEGER" />
+        <result column="cabinet_name" property="cabinetName" jdbcType="VARCHAR" />
+        <result column="cabinet_code" property="cabinetCode" jdbcType="VARCHAR" />
+        <result column="box_name" property="boxName" jdbcType="VARCHAR" />
+        <result column="box_code" property="boxCode" jdbcType="VARCHAR" />
+        <result column="box_size_name" property="boxSizeName" jdbcType="VARCHAR" />
+        <result column="box_size_code" property="boxSizeCode" jdbcType="VARCHAR" />
+        <result column="charge_type" property="chargeType" jdbcType="CHAR" />
+        <result column="cycle_time" property="cycleTime" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="box_state" property="boxState" jdbcType="CHAR" />
+        <result column="check_type" property="checkType" jdbcType="INTEGER" />
+        <result column="timeout" property="timeout" jdbcType="INTEGER" />
+        <result column="fetch_time" property="fetchTime" jdbcType="TIMESTAMP" />
+        <result column="retreat_id" property="retreatId" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, created_by, created_date, last_modified_by, last_modified_date, cabinet_id, box_id,
+        box_size_id, charge_standard_id, cabinet_name, cabinet_code, box_name, box_code,
+        box_size_name, box_size_code, charge_type, cycle_time, price, order_id, box_state,
+        check_type, timeout, fetch_time, retreat_id
+    </sql>
+
+    <insert id="save" parameterType="com.jiejing.locker.domains.LeaseBox" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_lease_box
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="createdBy != null" >
+                created_by,
+            </if>
+            <if test="createdDate != null" >
+                created_date,
+            </if>
+            <if test="lastModifiedBy != null" >
+                last_modified_by,
+            </if>
+            <if test="lastModifiedDate != null" >
+                last_modified_date,
+            </if>
+            <if test="cabinetId != null" >
+                cabinet_id,
+            </if>
+            <if test="boxId != null" >
+                box_id,
+            </if>
+            <if test="boxSizeId != null" >
+                box_size_id,
+            </if>
+            <if test="chargeStandardId != null" >
+                charge_standard_id,
+            </if>
+            <if test="cabinetName != null" >
+                cabinet_name,
+            </if>
+            <if test="cabinetCode != null" >
+                cabinet_code,
+            </if>
+            <if test="boxName != null" >
+                box_name,
+            </if>
+            <if test="boxCode != null" >
+                box_code,
+            </if>
+            <if test="boxSizeName != null" >
+                box_size_name,
+            </if>
+            <if test="boxSizeCode != null" >
+                box_size_code,
+            </if>
+            <if test="chargeType != null" >
+                charge_type,
+            </if>
+            <if test="cycleTime != null" >
+                cycle_time,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="boxState != null" >
+                box_state,
+            </if>
+            <if test="checkType != null" >
+                check_type,
+            </if>
+            <if test="timeout != null" >
+                timeout,
+            </if>
+            <if test="fetchTime != null" >
+                fetch_time,
+            </if>
+            <if test="retreatId != null" >
+                retreat_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null" >
+                #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createdDate != null" >
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null" >
+                #{lastModifiedBy,jdbcType=INTEGER},
+            </if>
+            <if test="lastModifiedDate != null" >
+                #{lastModifiedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cabinetId != null" >
+                #{cabinetId,jdbcType=INTEGER},
+            </if>
+            <if test="boxId != null" >
+                #{boxId,jdbcType=INTEGER},
+            </if>
+            <if test="boxSizeId != null" >
+                #{boxSizeId,jdbcType=INTEGER},
+            </if>
+            <if test="chargeStandardId != null" >
+                #{chargeStandardId,jdbcType=INTEGER},
+            </if>
+            <if test="cabinetName != null" >
+                #{cabinetName,jdbcType=VARCHAR},
+            </if>
+            <if test="cabinetCode != null" >
+                #{cabinetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="boxName != null" >
+                #{boxName,jdbcType=VARCHAR},
+            </if>
+            <if test="boxCode != null" >
+                #{boxCode,jdbcType=VARCHAR},
+            </if>
+            <if test="boxSizeName != null" >
+                #{boxSizeName,jdbcType=VARCHAR},
+            </if>
+            <if test="boxSizeCode != null" >
+                #{boxSizeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="chargeType != null" >
+                #{chargeType,jdbcType=CHAR},
+            </if>
+            <if test="cycleTime != null" >
+                #{cycleTime,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="boxState != null" >
+                #{boxState,jdbcType=CHAR},
+            </if>
+            <if test="checkType != null" >
+                #{checkType,jdbcType=INTEGER},
+            </if>
+            <if test="timeout != null" >
+                #{timeout,jdbcType=INTEGER},
+            </if>
+            <if test="fetchTime != null" >
+                #{fetchTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="retreatId != null" >
+                #{retreatId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

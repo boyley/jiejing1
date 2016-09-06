@@ -1,18 +1,19 @@
 package com.jiejing.locker.repository;
 
 import com.jiejing.locker.domains.LeaseBox;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  * Created by Bogle on 2016/9/2.
  */
-public interface LeaseBoxRepository extends JpaRepository<LeaseBox, Integer> {
+@Mapper
+public interface LeaseBoxRepository {
 
-    @Query(nativeQuery = true,
+        @Select(
             value = "select \n" +
                     "DISTINCT locker_lease_box.id,\n" +
                     "locker_lease_box.created_by,\n" +
@@ -42,11 +43,13 @@ public interface LeaseBoxRepository extends JpaRepository<LeaseBox, Integer> {
                     "LEFT JOIN locker_action_log ON locker_action_log.lease_id = locker_lease_box.id\n" +
                     "LEFT JOIN locker_lease_info ON locker_lease_info.id = locker_action_log.lease_info_id\n" +
                     "LEFT JOIN sys_dictionary ON sys_dictionary.id = locker_lease_info.info_type\n" +
-                    "WHERE locker_lease_box.cabinet_id = :cabinet_id\n" +
+                    "WHERE locker_lease_box.cabinet_id = #{cabinet_id,jdbcType=INTEGER}\n" +
                     "AND locker_lease_box.box_state='DQ'\n" +
                     "AND locker_action_log.opt_type='CX'\n" +
-                    "AND sys_dictionary.`code` = :code\n" +
+                    "AND sys_dictionary.`code` = #{code,jdbcType=VARCHAR}\n" +
                     "ORDER BY locker_lease_box.created_date DESC"
     )
-    Stream<LeaseBox> findAll(@Param("cabinet_id") Integer cabinetId, @Param("code") String code);
+    List<LeaseBox> findAll(@Param("cabinet_id") Integer cabinetId, @Param("code") String code);
+
+    int save(LeaseBox leaseBox);
 }

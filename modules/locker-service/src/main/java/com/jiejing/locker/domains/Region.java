@@ -1,39 +1,62 @@
 package com.jiejing.locker.domains;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import java.util.Date;
 
-/**
- * 区域信息
- * Created by Bogle on 2016/8/29.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_region")
-@EntityListeners(AuditingEntityListener.class)
-public class Region extends AbstractAuditingEntity<Integer> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Region {
+    /**
+    * 主键
+    */
+    private Integer id;
 
-    @Column(name = "code", nullable = false,length = 32)
+    /**
+    * 编码
+    */
     private String code;
 
-    @Column(name = "name", nullable = true,length = 32)
+    /**
+    * 节点名称
+    */
     private String name;
 
-    @Column(name = "parent_id", nullable = false)
-    private Integer parentId;//所属父节点id
+    /**
+    * 所属父节点id
+    */
+    private Integer parentId;
 
-    @Column(name = "url", nullable = true)
+    /**
+    * 访问路径
+    */
     private String url;
 
-    @Column(name = "description", nullable = true,length = 1000)
+    /**
+    * 描述
+    */
     private String description;
+
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
+
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
+
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
+
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+
 }

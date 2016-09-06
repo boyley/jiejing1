@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.BoxRepository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.Box">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="cabinet_id" property="cabinetId" jdbcType="INTEGER"/>
+        <result column="box_size_id" property="boxSizeId" jdbcType="INTEGER"/>
+        <result column="gate_lock_state" property="gateLockState" jdbcType="CHAR"/>
+        <result column="deposit_state" property="depositState" jdbcType="CHAR"/>
+        <result column="created_by" property="createdBy" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="last_modified_by" property="lastModifiedBy" jdbcType="INTEGER"/>
+        <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, code, cabinet_id, box_size_id, gate_lock_state, deposit_state, created_by,
+        created_date, last_modified_by, last_modified_date, description, status
+    </sql>
+    <update id="update" parameterType="com.jiejing.locker.domains.Box">
+        update locker_box
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="cabinetId != null">
+                cabinet_id = #{cabinetId,jdbcType=INTEGER},
+            </if>
+            <if test="boxSizeId != null">
+                box_size_id = #{boxSizeId,jdbcType=INTEGER},
+            </if>
+            <if test="gateLockState != null">
+                gate_lock_state = #{gateLockState,jdbcType=CHAR},
+            </if>
+            <if test="depositState != null">
+                deposit_state = #{depositState,jdbcType=CHAR},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createdDate != null">
+                created_date = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null">
+                last_modified_by = #{lastModifiedBy,jdbcType=INTEGER},
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

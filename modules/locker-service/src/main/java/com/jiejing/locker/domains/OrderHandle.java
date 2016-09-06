@@ -1,35 +1,51 @@
 package com.jiejing.locker.domains;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import java.util.Date;
 
-/**
- * 订单处理
- * Created by Bogle on 2016/8/30.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_order_handle")
-@EntityListeners(AuditingEntityListener.class)
-public class OrderHandle extends AbstractAuditingEntity<Integer> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class OrderHandle {
+    /**
+    * 主键
+    */
+    private Integer id;
 
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
 
-    @Column(name = "order_id", nullable = false)
-    private Integer orderId;//订单id
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
 
-    @Column(name = "action_type", nullable = false)
-    private Integer actionType;//动作类型，关联sys_dictionary表
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
 
-    @Column(name = "description", nullable = true)
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+    /**
+    * 订单id
+    */
+    private Integer orderId;
+
+    /**
+    * 动作类型，关联sys_dictionary表
+    */
+    private Integer actionType;
+
+    /**
+    * 描述
+    */
     private String description;
 
 

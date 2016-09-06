@@ -1,5 +1,6 @@
 package com.jiejing.locker;
 
+import org.apache.ibatis.type.LocalDateTimeTypeHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

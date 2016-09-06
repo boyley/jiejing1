@@ -1,45 +1,77 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
-import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Data;
 
-import javax.persistence.*;
+import java.util.Date;
 
-/**
- * 箱子信息
- * Created by Bogle on 2016/8/29.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_box")
-@EntityListeners(AuditingEntityListener.class)
-public class Box extends AbstractAuditingEntity<Integer> {
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Box {
+    /**
+    * 主键
+    */
+    private Integer id;
 
-    @Column(name = "name", nullable = false, length = 32)
+    /**
+    * 箱子名称
+    */
     private String name;
-    @Column(name = "code", nullable = false, length = 32)
+
+    /**
+    * 箱子编号
+    */
     private String code;
-    @Column(name = "cabinet_id", nullable = false)
+
+    /**
+    * 柜子外键
+    */
     private Integer cabinetId;
-    @Column(name = "box_size_id", nullable = false)
+
+    /**
+    * 箱子规格外键
+    */
     private Integer boxSizeId;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gate_lock_state", nullable = true)
-    private Const.GateLockState gateLockState;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "deposit_state", nullable = true)
-    private Const.DepositState depositState;//存物状态Y:有存物，N：无存物，ERROR：异常
-    @Column(name = "description", nullable = true, length = 1000)
+
+    /**
+    * 门锁状态;OPEN:打开，CLOSE:关闭，ERROR：异常
+    */
+    private String gateLockState;
+
+    /**
+    * 存物状态Y:有存物，N：无存物，ERROR：异常,ZY:占用
+    */
+    private Const.DepositState depositState;
+
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
+
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
+
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
+
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+    /**
+    * 描述
+    */
     private String description;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Const.Status status;//是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
-//    @ManyToOne
-//    @JoinColumn(name = "box_size_id", referencedColumnName = "id")
-//    private BoxSize boxSize;//箱子规格
+
+    /**
+    * 是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
+    */
+    private Const.Status status;
 
 }

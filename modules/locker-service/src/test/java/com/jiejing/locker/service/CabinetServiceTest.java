@@ -19,10 +19,15 @@ public class CabinetServiceTest extends AbsServiceTest {
     private ILeaseBoxService leaseBoxService;
 
     @Test
+    public void boxSize() {
+        printlnJson(this.cabinetRepository.findBoxSize(1));
+    }
+
+    @Test
     public void leaseBox() {
         LeaseBox leaseBox = new LeaseBox();
         leaseBox.setCabinetId(1);
-        leaseBox.setCheckCode("SFZ");
+//        leaseBox.setCheckCode("SFZ");
         printlnJson(leaseBoxService.quXiang(leaseBox).toArray());
     }
 

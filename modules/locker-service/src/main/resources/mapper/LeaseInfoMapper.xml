@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.LeaseInfoRespository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.LeaseInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="info_type" property="infoType" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="info_file" property="infoFile" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, info_type, code, name, info_file
+    </sql>
+    <insert id="save" parameterType="com.jiejing.locker.domains.LeaseInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_lease_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="infoType != null">
+                info_type,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="infoFile != null">
+                info_file,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="infoType != null">
+                #{infoType,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="infoFile != null">
+                #{infoFile,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

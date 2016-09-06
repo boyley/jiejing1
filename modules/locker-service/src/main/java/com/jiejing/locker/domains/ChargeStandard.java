@@ -1,40 +1,63 @@
 package com.jiejing.locker.domains;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
-/**
- * 收费标准
- * Created by Bogle on 2016/8/29.
- */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "locker_charge_standard")
-@EntityListeners(AuditingEntityListener.class)
-public class ChargeStandard extends AbstractAuditingEntity<Integer> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ChargeStandard {
+    /**
+    * 主键
+    */
+    private Integer id;
 
-    @Column(name = "price", nullable = false,precision=9, scale=2)
-    private BigDecimal price;//价格
+    /**
+    * 价格
+    */
+    private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "charge_type", nullable = false)
-    private Const.ChargeType chargeType;//收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+    /**
+    * 收费方式（TIME_HOUR:时间节点，TIME_CYCLE:时间段收费）
+    */
+    private Const.ChargeType chargeType;
 
-    @Column(name = "cycle_time", nullable = false)
-    private Integer cycleTime;//收费周期（小时）
+    /**
+    * 收费周期（小时）
+    */
+    private Integer cycleTime;
 
-    @Column(name = "description", nullable = true,length = 1000)
+    /**
+    * 描述
+    */
     private String description;
 
-    @Column(name = "default_box_size", nullable = false)
+    /**
+    * 创建人
+    */
+    private Integer createdBy;
+
+    /**
+    * 创建时间
+    */
+    private Date createdDate;
+
+    /**
+    * 最后的更新人
+    */
+    private Integer lastModifiedBy;
+
+    /**
+    * 最后一次更新时间
+    */
+    private Date lastModifiedDate;
+
+    /**
+    * 默认收费规格
+    */
     private Integer defaultBoxSize;
+
 }

@@ -11,5 +11,5 @@ public interface IActionLogService {
 
     ActionLog save(ActionLog actionLog);
 
-    List<ActionLog> save(List<ActionLog> actionLogs);
+    int save(List<ActionLog> actionLogs);
 }

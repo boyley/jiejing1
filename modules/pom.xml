@@ -14,6 +14,8 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>locker-service</module>
+        <module>spring-data-mybatis</module>
+        <module>MyBatis-Generator</module>
     </modules>
 
     <properties>

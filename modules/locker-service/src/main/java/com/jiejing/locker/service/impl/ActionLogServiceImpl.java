@@ -19,11 +19,12 @@ public class ActionLogServiceImpl implements IActionLogService {
 
     @Override
     public ActionLog save(ActionLog actionLog) {
-        return this.actionLogRepository.save(actionLog);
+//       return this.actionLogRepository.save(actionLog);
+        return null;
     }
 
     @Override
-    public List<ActionLog> save(List<ActionLog> actionLogs) {
-        return this.actionLogRepository.save(actionLogs);
+    public int save(List<ActionLog> actionLogs) {
+        return this.actionLogRepository.saveList(actionLogs);
     }
 }
