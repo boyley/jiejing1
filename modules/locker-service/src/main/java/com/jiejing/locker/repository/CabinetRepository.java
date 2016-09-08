@@ -31,4 +31,6 @@ public interface CabinetRepository {
      */
     @Select(value = "select id,cabinet_id cabinetId,box_size_id boxSizeId,code,name,price,description from view_box_size where cabinet_id = #{id,jdbcType=INTEGER}")
     List<BoxSize> findBoxSize(@Param("id") Integer id);
+
+    void save(Cabinet cabinet);
 }

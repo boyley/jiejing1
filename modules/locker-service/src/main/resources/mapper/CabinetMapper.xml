@@ -25,6 +25,110 @@
         created_by, created_date, last_modified_by, last_modified_date, open_time, close_time
     </sql>
 
+    <insert id="save" parameterType="com.jiejing.locker.domains.Cabinet" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_cabinet
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="regionId != null" >
+                region_id,
+            </if>
+            <if test="lon != null" >
+                lon,
+            </if>
+            <if test="lat != null" >
+                lat,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="multiple != null" >
+                multiple,
+            </if>
+            <if test="voucherVerify != null" >
+                voucher_verify,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="createdBy != null" >
+                created_by,
+            </if>
+            <if test="createdDate != null" >
+                created_date,
+            </if>
+            <if test="lastModifiedBy != null" >
+                last_modified_by,
+            </if>
+            <if test="lastModifiedDate != null" >
+                last_modified_date,
+            </if>
+            <if test="openTime != null" >
+                open_time,
+            </if>
+            <if test="closeTime != null" >
+                close_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="regionId != null" >
+                #{regionId,jdbcType=INTEGER},
+            </if>
+            <if test="lon != null" >
+                #{lon,jdbcType=DECIMAL},
+            </if>
+            <if test="lat != null" >
+                #{lat,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="multiple != null" >
+                #{multiple,jdbcType=BIT},
+            </if>
+            <if test="voucherVerify != null" >
+                #{voucherVerify,jdbcType=BIT},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null" >
+                #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createdDate != null" >
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null" >
+                #{lastModifiedBy,jdbcType=INTEGER},
+            </if>
+            <if test="lastModifiedDate != null" >
+                #{lastModifiedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openTime != null" >
+                #{openTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closeTime != null" >
+                #{closeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
     <select id="findOneById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />

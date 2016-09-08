@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jiejing.locker.defines.Const;
 import lombok.Data;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Data
@@ -34,10 +35,12 @@ public class Box {
     */
     private Integer boxSizeId;
 
+    private String boxSizeCode;
+
     /**
     * 门锁状态;OPEN:打开，CLOSE:关闭，ERROR：异常
     */
-    private String gateLockState;
+    private Const.GateLockState gateLockState;
 
     /**
     * 存物状态Y:有存物，N：无存物，ERROR：异常,ZY:占用
@@ -52,7 +55,7 @@ public class Box {
     /**
     * 创建时间
     */
-    private Date createdDate;
+    private ZonedDateTime createdDate;
 
     /**
     * 最后的更新人
@@ -62,7 +65,7 @@ public class Box {
     /**
     * 最后一次更新时间
     */
-    private Date lastModifiedDate;
+    private ZonedDateTime lastModifiedDate;
 
     /**
     * 描述

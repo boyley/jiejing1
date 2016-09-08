@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.RegionRepository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.Region">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="created_by" property="createdBy" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="last_modified_by" property="lastModifiedBy" jdbcType="INTEGER"/>
+        <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, code, name, parent_id, url, description, created_by, created_date, last_modified_by,
+        last_modified_date
+    </sql>
+    <select id="findOne" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from locker_region
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="exists" resultType="java.lang.Boolean" parameterType="java.lang.Integer" >
+        SELECT EXISTS(
+            select
+            <include refid="Base_Column_List"/>
+            from locker_region
+            where id = #{id,jdbcType=INTEGER}
+        )
+    </select>
+
+</mapper>

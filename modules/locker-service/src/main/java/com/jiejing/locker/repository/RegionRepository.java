@@ -8,5 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RegionRepository  {
+
     boolean exists(Integer id);
+
+    Region findOne(Integer regionId);
 }

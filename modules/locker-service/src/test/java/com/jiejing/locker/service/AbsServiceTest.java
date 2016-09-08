@@ -10,8 +10,8 @@ import java.io.IOException;
 /**
  * Created by Bogle on 2016/8/30.
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public abstract class AbsServiceTest {
 
     ObjectMapper mapper = new ObjectMapper();

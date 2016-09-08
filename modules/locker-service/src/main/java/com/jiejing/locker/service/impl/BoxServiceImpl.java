@@ -25,11 +25,8 @@ public class BoxServiceImpl implements IBoxService {
     }
 
     @Override
-    public Iterable<Box> save(Iterable<Box> entities) {
-        Iterator<Box> iter = entities.iterator();
-
-//        return boxRepository.save(entities);
-        return null;
+    public int saveList(Iterable<Box> entities) {
+        return boxRepository.saveList(entities);
     }
 
     @Override

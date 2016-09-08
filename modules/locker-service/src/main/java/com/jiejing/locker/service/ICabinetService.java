@@ -17,7 +17,7 @@ public interface ICabinetService {
      *
      * @param cabinet
      */
-    Cabinet save(Cabinet cabinet);
+    Optional<Cabinet> save(Cabinet cabinet);
 
     Optional<Cabinet> findOne(Integer id);
 

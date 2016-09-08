@@ -5,39 +5,58 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
-
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Dictionary {
+public class Media {
     /**
     * 主键
     */
     private Integer id;
 
     /**
-    * 字典编码
+    * 标题
     */
-    private String code;
+    private String title;
 
     /**
-    * 字典名称
+    * 内容
     */
-    private String name;
+    private String content;
 
     /**
-    * 字典值类型
+    * 跳转目标
     */
-    private String valueType;
+    private String targetUrl;
 
     /**
-    * 字典值
+    * 广告链接
     */
-    private String value;
+    private String url;
 
     /**
-    * 描述
+    * 停留时间(单位秒)
     */
-    private String description;
+    private Integer time;
+
+    /**
+    * 排序(越大越前)
+    */
+    private Integer seq;
+
+    /**
+    * 开始时间
+    */
+    private ZonedDateTime startTime;
+
+    /**
+    * 结束时间
+    */
+    private ZonedDateTime endTime;
+
+    /**
+    * 文件类型
+    */
+    private String media;
 
     /**
     * 创建人
@@ -60,18 +79,7 @@ public class Dictionary {
     private ZonedDateTime lastModifiedDate;
 
     /**
-    * 父节点id
+    * 是否可用
     */
-    private Integer parentId;
-
-    /**
-    * 父节点code
-    */
-    private String parentCode;
-
-    /**
-    * 是否可编辑
-    */
-    private Boolean editable;
-
+    private Boolean enable;
 }

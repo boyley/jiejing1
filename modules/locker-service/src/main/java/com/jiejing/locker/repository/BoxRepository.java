@@ -21,4 +21,6 @@ public interface BoxRepository {
 
 
     int update(Box box);
+
+    int saveList(Iterable<Box> entities);
 }

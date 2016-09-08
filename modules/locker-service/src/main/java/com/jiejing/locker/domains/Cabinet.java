@@ -1,10 +1,15 @@
 package com.jiejing.locker.domains;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.jiejing.locker.defines.Const;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -30,6 +35,11 @@ public class Cabinet {
     private Integer regionId;
 
     /**
+     * 地址：道路/小区 编码
+     */
+    private Region region;
+
+    /**
     * 地理经度
     */
     private BigDecimal lon;
@@ -42,7 +52,7 @@ public class Cabinet {
     /**
     * 是否禁用: ENABLE:启用，DISENABLE:禁用，ERROR:错误异常
     */
-    private String status;
+    private Const.Status status;
 
     /**
     * 可多次使用
@@ -67,7 +77,7 @@ public class Cabinet {
     /**
     * 创建时间
     */
-    private Date createdDate;
+    private ZonedDateTime createdDate;
 
     /**
     * 最后的更新人
@@ -77,17 +87,23 @@ public class Cabinet {
     /**
     * 最后一次更新时间
     */
-    private Date lastModifiedDate;
+    private ZonedDateTime lastModifiedDate;
 
     /**
     * 开机时间
     */
-    private Date openTime;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime openTime;
 
     /**
     * 关机时间
     */
-    private Date closeTime;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime closeTime;
 
+    /**
+     * 箱子列表
+     */
+    private List<Box> boxs;
 
 }

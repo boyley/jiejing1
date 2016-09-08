@@ -24,12 +24,10 @@ public class OrderResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getBoxSize(@RequestBody Order order) {
-        return orderService.save(order).map(e -> {
-            return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/order/" + e.getId()).build().toUri())
-                    .headers(HeaderUtil.createAlert("order.created", e.getId()))
-                    .body(order);
-
-        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        orderService.save(order);
+        return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/order/" + order.getId()).build().toUri())
+                .headers(HeaderUtil.createAlert("order.created", order.getId()))
+                .body(order);
     }
 
     @RequestMapping(value = "/pay",

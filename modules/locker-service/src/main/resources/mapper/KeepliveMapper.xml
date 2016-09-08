@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiejing.locker.repository.KeepliveRepository">
+    <resultMap id="BaseResultMap" type="com.jiejing.locker.domains.Keeplive">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="type" jdbcType="CHAR" property="type" />
+        <result column="object_id" jdbcType="INTEGER" property="objectId" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="error_code" jdbcType="VARCHAR" property="errorCode" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="keeplive_time" jdbcType="TIMESTAMP" property="keepliveTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, type, object_id, created_date, error_code, description
+  </sql>
+
+    <insert id="save" parameterType="com.jiejing.locker.domains.Keeplive" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_keeplive
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="objectId != null">
+                object_id,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="errorCode != null">
+                error_code,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="keepliveTime != null">
+                keeplive_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=CHAR},
+            </if>
+            <if test="objectId != null">
+                #{objectId,jdbcType=INTEGER},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="errorCode != null">
+                #{errorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="keepliveTime != null">
+                #{keepliveTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="saveList" parameterType="list">
+        insert into locker_keeplive (id, type, object_id,
+        created_date, error_code, description,
+        keeplive_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=INTEGER}, #{item.type,jdbcType=CHAR}, #{item.objectId,jdbcType=INTEGER},
+            #{item.createdDate,jdbcType=TIMESTAMP}, #{item.errorCode,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR},
+            #{item.keepliveTime,jdbcType=TIMESTAMP})
+        </foreach>
+
+    </insert>
+
+
+</mapper>

@@ -12,7 +12,7 @@ public interface IBoxService {
 
     Optional<Box> findOne(Integer id);
 
-    Iterable<Box> save(Iterable<Box> entities);
+    int saveList(Iterable<Box> entities);
 
     Box findOneEnableBox(Integer boxSizeId);
 

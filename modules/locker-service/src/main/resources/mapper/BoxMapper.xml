@@ -20,6 +20,24 @@
         id, name, code, cabinet_id, box_size_id, gate_lock_state, deposit_state, created_by,
         created_date, last_modified_by, last_modified_date, description, status
     </sql>
+
+    <insert id="saveList" parameterType="com.jiejing.locker.domains.Box" useGeneratedKeys="true" keyProperty="id">
+        insert into locker_box (id, name, code,
+        cabinet_id, box_size_id, gate_lock_state,
+        deposit_state, created_by, created_date,
+        last_modified_by, last_modified_date, description,
+        status)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR},
+            #{item.cabinetId,jdbcType=INTEGER}, #{item.boxSizeId,jdbcType=INTEGER}, #{item.gateLockState,jdbcType=CHAR},
+            #{item.depositState,jdbcType=CHAR}, #{item.createdBy,jdbcType=INTEGER}, #{item.createdDate,jdbcType=TIMESTAMP},
+            #{item.lastModifiedBy,jdbcType=INTEGER}, #{item.lastModifiedDate,jdbcType=TIMESTAMP}, #{item.description,jdbcType=VARCHAR},
+            #{item.status,jdbcType=CHAR})
+        </foreach>
+
+    </insert>
+
     <update id="update" parameterType="com.jiejing.locker.domains.Box">
         update locker_box
         <set>
